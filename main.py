@@ -19,10 +19,10 @@ if __name__ == "__main__":
     pdf_path = "task_instructions/10-023 Programming with User-defined Functions.pdf"
     task_title, task_instructions = stream_task_pdf(pdf_path)
 
-    code_path = "model_answers/holiday.py"
+    code_path = "model_answers/latest_version_holiday.py"
     code = stream_code_file(code_path)
 
-    review_path = "sample_reviews/task_review.txt"
+    review_path = "sample_reviews/sample_review1.txt"
     review_text = stream_review(review_path)
     segmented_review = split_review(review_text)
 
