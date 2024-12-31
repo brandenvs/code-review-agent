@@ -36,7 +36,7 @@ Consider using error handling with your numerical inputs to prevent your applica
 Another improvement is associated with your code documentation. In Python, we have two types of code documentation: a block comment, which is the one you have used and starts with a hashtag, and then we have docstrings. I recommend using docstrings to document your user-defined functions effectively. Additionally, kindly go through the following PEP 8 resource to familiarise yourself with docstrings and their use cases.
 
 PEP 8 resource
-ðŸ”— https://peps.python.org/pep-0008/#comments
+— https://peps.python.org/pep-0008/#comments
 
 
 Overall
