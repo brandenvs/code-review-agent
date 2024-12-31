@@ -1,0 +1,58 @@
+------------------------------------------------------------------------------------------
+----------------------------------------- REVIEW -----------------------------------------
+------------------------------------------------------------------------------------------
+Student: Walid White
+Task name: Task 9 - OOP - Classes
+Course: DfE - Cyber Security (Fundamentals)
+
+Date Submitted: 11 December 2024
+Date Reviewed: 12 December 2024
+Review ID: BSWW121224-6399
+------------------------------------------------------------------------------------------
+
+Efficiency: 4.0
+
+
+Completeness: 4.0
+
+
+Style: 4.0
+
+
+Documentation: 4.0
+
+
+Positive
+Hey, Walid.
+
+Thank you for completing your task on object-oriented programming (OOP) and requesting a code review. The email_simulator.py you submitted is an excellent submission that introduces an entirely different approach to OOP that fully leverages the concept ðŸ‘.
+
+âœ… You've created the necessary email object class that is responsible for setting the email attributes(sender, subject, content, and read). The class also manages the email objects by including functions such as mark_as_read(), which updates the read attribute of the email object to True.
+
+âœ… Another class is defined as EmailSimulator. This is an excellent demonstration of your understanding and ability with Python objects. Inside this class, you have all the required functions(add_email, list_all_emails, read_email, and view_unread_emails).. ðŸŽ¯ You've also included a run function that handles the simulator menu and maps the class's functions to their respective menu option.
+
+âœ… A main function initialises the emailSimulator object and calls the respective functions to populate the inbox, which is defined as a class attribute (which is awesome!).
+
+âœ… The main guard used to execute the script is the cherry on top and appropriately calls the main() function at runtime.
+
+âœ… Your code is documented thoroughly and structured well, and you've followed best practices throughout your submission.
+
+
+Improve
+Consider the following improvements to your already excellent Email Simulator:
+
+ðŸ’¡ Code Styleâ€”When writing Python code, we follow the guidelines outlined in the PEP 8 documentation(ðŸ”— https://peps.python.org/pep-0008/). One of the guidelines is to space our code in a readable fashion by using more spacing around control structures such as for-loops, while-loops, if/else statements, etc. We also must ensure there are two blank lines above each Python function and class.
+
+ðŸ’¡ Code Styleâ€”For line 16, you will need to break the line into two separate lines. This is because, once again, PEP 8 guidelines outlined that we should exceed a character limit of 79 characters when writing Python code. This goes for block comments as well. 
+
+Please use the following resource to learn more - ðŸ”— https://peps.python.org/pep-0008/#maximum-line-length
+
+
+Overall
+Overall, you've done a great job of completing the task objectives, aligning with the objective instructions and building a robust, easy-to-use email simulator that effectively manages a user's inbox.
+
+Well done, Walid, keep up the awesome workðŸ’ª!
+
+
+
+------------------------------------------------------------------------------------------
