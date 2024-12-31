@@ -1,0 +1,49 @@
+------------------------------------------------------------------------------------------
+----------------------------------------- REVIEW -----------------------------------------
+------------------------------------------------------------------------------------------
+Student: Armand le Roux
+Task name: Task 19 - Programming with User-defined Functions
+Course: Python Basics for Cyber Security
+
+Date Submitted: 17 December 2024
+Date Reviewed: 18 December 2024
+Review ID: BSAR181224-0793
+------------------------------------------------------------------------------------------
+
+Efficiency: 4.0
+
+
+Completeness: 4.0
+
+
+Style: 4.0
+
+
+Documentation: 4.0
+
+
+Positive
+Hey, Armand.
+
+Thank you for completing your task on Programming with User-defined functions in Python. You have clearly grasped the covered content and understood the concept of user-defined functions. Positive aspects include:
+âœ… Robust approach to input validation, with a dedicated function to validate numerical input; additionally, avoiding string text input when selecting a destination is great and eliminates the need for case-insensitive input fields.
+âœ… Defined the required user-defined functions, and I commend you for including docstrings with each function.
+âœ… The script, as a whole, follows best practices and is an excellent example of Pythonic user-defined functions.
+
+
+Improve
+ðŸ’¡ Consider making your script even more Pythonic with a main guard. Main guards are useful when we want to fully modularise our code, which is ideal for integrating multiple Python scripts with each other. We will be able to call a script(module) and reference specific functions we need. An example of a main guard would be as follows:
+```
+if __name__ == "__main__":
+    main()
+```
+
+ðŸ’¡ Additionally, making the script fully modular will require you to avoid using the global scope by encapsulating all the code within a user-defined function. You would want to move all the code from lines 50 - 96 into a main() function, which is automatically called when the script is run (given that you have placed a main guard at the bottom of the script).
+
+
+Overall
+Overall, this is an excellent submission, Armand, and you've completed each task objective.
+
+
+
+------------------------------------------------------------------------------------------
