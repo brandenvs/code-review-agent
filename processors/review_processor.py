@@ -34,20 +34,16 @@ def split_review_old(processed_review_text):
 
 
 def split_review(processed_review_text):
-    # Keywords to split the review
     keywords = ["Positive", "Improve", "Overall"]
 
-    # Regex pattern to extract score values
     score_pattern = r'(Efficiency|Completeness|Style|Documentation):\s*([\d.]+)'
 
-    # Extract scores from the text
     scores = {match[0]: float(match[1]) for match in re.findall(score_pattern, processed_review_text)}
 
     # Regex pattern to split the text by keywords
     split_pattern = r'\b(' + '|'.join(keywords) + r')\b'
     split_text = re.split(split_pattern, processed_review_text)
 
-    # Extract relevant sections
     result = []
     for i in range(1, len(split_text), 2):
         result.append(split_text[i] + " " + split_text[i + 1].strip())

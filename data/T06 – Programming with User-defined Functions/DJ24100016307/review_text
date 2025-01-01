@@ -1,0 +1,53 @@
+------------------------------------------------------------------------------------------
+----------------------------------------- REVIEW -----------------------------------------
+------------------------------------------------------------------------------------------
+Student: Donna Cannon
+Task name: Task 6 - Programming with User-defined Functions
+Course: DfE - Data Science (Fundamentals)
+
+Date Submitted: 29 December 2024
+Date Reviewed: 31 December 2024
+Review ID: BSDC311224-6715
+------------------------------------------------------------------------------------------
+
+Efficiency: 4.0
+
+
+Completeness: 3.0
+
+
+Style: 4.0
+
+
+Documentation: 4.0
+
+
+Positive
+Hey, Donna.
+
+Thank you for completing your task on user-defined functions in Python.
+
+Your holiday cost calculator completes the task objectives by implementing the three user-defined functions(hotel_cost, plane_cost and car_rental). These functions are well documented and perform the necessary mapping and calculations based on the input parameters passed.
+
+
+Improve
+âŒ Code Correctness
+
+When prompting the user for input, we should be mindful that a user may input inconsistent inputs that are not the expected input. Our applications should handle these inconsistencies by normalising the input before passing it to a function. For example, the program throws an exception if a user had to use your application and input Paris instead of the expected Paris. To resolve this, you will normalise your input function by calling.lower() at the end of city_flight input. This will always make the input case insensitive, and inside your plane_cost function, you would normalise the strings so that they are also only lowercase.
+
+âš ï¸ Code Documentation
+
+As much as I appreciate that you documented your code well, your docstrings for each function are misplaced. The correct position for these docstrings is directly after defining the function. 
+For example, see the linked PEP 8 documentation - 
+ðŸ”— https://peps.python.org/pep-0257/#:~:text=a%20separate%20line.-,For%20example%3A,-def%20complex(
+
+
+Overall
+Overall, you've implemented the task objectives and compiled a well-documented and structured Python script that determines the cost of a user's holiday based on their inputs. However, please kindly note the above improvements as these will benefit you when completing tasks in the future. 
+---
+
+Well done, Donna, keep up the good work ðŸ‘.
+
+
+
+------------------------------------------------------------------------------------------

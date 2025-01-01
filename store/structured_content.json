@@ -1,0 +1,142 @@
+[
+  {
+    "page": 1,
+    "section": "Content",
+    "content": "Programming With User-Deﬁned Functions Task"
+  },
+  {
+    "page": 2,
+    "section": "Content",
+    "content": "Introduction This lesson w ill focus on teaching you how to create your ow n functions. Functions are the backbone of code, em pow ering you to tackle com plex tasks w ith elegance and precision. You w ill also learn how functions can be used to com pute certain values using list elem ents and text ﬁle contents. Deﬁning a function A function can be deﬁned as follow s: #Thisfunction,add_one,takesasingleparameterxandreturnsthevalueofxincrementedby1 defadd_one(x):y=x+1returny The function that has been created in the exam ple above is deﬁned by the keyw orddef and is nam edadd_one . It takes the param eterx as input. A parameter is a variable that is declared in a function deﬁnition. Param eters store the data needed to perform the logic that the function speciﬁes. Param eters are ﬁlled w hen data is passed to the function as an argum ent w hen the function is called (w hich you w ill learn about soon). The code indented underdefadd_one is the logic of the function. It deﬁnes w hat happens w hen the function is called. You can pretty m uch do anything you w ant in a function. For exam ple, you can create new data structures, use conditionals, etc. The function in the exam ple above com putes a new variable,y , w hich is the value stored in variablex w ith1 added. It w ill thenreturn the valuey . The general syntax of a function in Python is as follow s: deffunctionName(parameters):statementsreturn(expression) The def and return keywords N ote thedef keyw ord. Python know s you're deﬁning a function w hen you start a line w ith this keyw ord. After the keyw ord,def , put a function nam e, its input param eters, and then a colon, w ith the logic of the function indented underneath. 2 © 2024 H yperionD ev. All rights reserved."
+  },
+  {
+    "page": 3,
+    "section": "Content",
+    "content": "The value after thereturn statem ent, resulting fromexpression , w ill be returned/passed back to w hatever code ‘called’ the function, at w hich point the execution of that block of code stops. N ote that thereturn keyw ord doesn’t have to be included in a function. You can w rite functions that return (send back) a value to the calling function as in the syntax exam ple above, or you can w rite functions that just do som ething (such as calculate or print) and don’t return anything. Before w e go into this any further, let’s look at w hat it m eans to call a function. Print versus return Let’s look at the differences betw eenprint andreturn : ●print outputs data to the console. It's useful for debugging and displaying inform ation to the user. defgreet(name):#Thisfunctiontakesa'name',andprintsapersonalisedgreeting.print(f\"Hello,{name}!\") greet(\"Alice\")#Thiswillprint\"Hello,Alice!\"totheconsole. ●return sends data back to the caller of the function. It's used w hen you need to reuse the result of a function elsew here in your program. defadd(a,b):#Thisfunctiontakestwoarguments,aandb,andreturnstheirsum.returna+bresult=add(3,4) print(result)#Printthevalueof'result'(whichis7)totheconsole. In sum m ary,print is for displaying inform ation, w hilereturn is for passing data from a function to the rest of the program. The returned value is stored in a variable, w hich can then be used elsew here in the program or printed to the console. Calling a function It is good practice to deﬁne all your functions at the top of your code ﬁle and ‘call’ them as needed later in the code ﬁle. You can call a function by using the function’s nam e, follow ed by the values you w ould like to pass to the param eters in parentheses. The values that you pass to the function are referred to as arguments. 3 © 2024 H yperionD ev. All rights reserved."
+  },
+  {
+    "page": 4,
+    "section": "Content",
+    "content": "H ere is an exam ple of calling ouradd_one function, and assigning the value returned from it to a variable: defadd_one(x):#Functiontoadd1toxy=x+1returny #Calladd_onewith5andstoretheresultsinavariableresult_num=add_one(5) #Outputtheresults,whichis6print(result_num) You can deﬁne a function, but it w ill not run unless called som ew here in the code. For exam ple, although w e have deﬁned the functionadd_one above, the code indented underneath w ill never be executed unless another line that callsadd_one w ith the com m andadd_one(some_variable) is added som ew here in the m ain body of your code. W orking with function parameters In the function deﬁnition, the parameters are betw een the parentheses after the function nam e. You can have m ore than one of these variables or param eters – sim ply separate them by com m as. W hen you call a function, you place the value you w ould like to pass to the function as an argument in parentheses after the function nam e, e.g. result_num=add_one(5) (If w e didn’t do som ething w ith the returned value, such as set up a variable to hold it, or a print statem ent to output it, w hat do you think w ould happen?) N ow, let’s look at another exam ple show ing som ething very sim ilar to our ﬁrst function-calling exam ple, but w ith the code w ritten to be shorter and m ore efﬁcient (m ore succinct code can be m ore challenging for beginners to understand, but it’s w orth noting w hen code can be w ritten m ore efﬁciently, as this is w hat program m ers ultim ately aspire to achieve). In the exam ple below, theadd_one function is called again. H ere, w e pass the value10 as an argument to the function. As w e created a param eter calledx w hen w e deﬁned the functionadd_one , passing the argum ent10 to the function w ill result in the param eterx being assigned the value10 . 4 © 2024 H yperionD ev. All rights reserved."
+  },
+  {
+    "page": 5,
+    "section": "Content",
+    "content": "defadd_one(x):#Functiontoadd1toxy=x+1returny num=10 #Callthefunctionwithintheprintstatementandoutputtheresultprint(\"10plus1isequalto:\"+str(add_one(num))+\".\") #Alternativelynum_plus_one=add_one(10) #Usethestoredresultintheprintstatementprint(\"10plus1isequalto:\"+str(num_plus_one)+\".\") Think of a call to the function – e.g.add_one(num) – as a placeholder for som e com putation. The function w ill run its code and return its result in that place. The above exam ples have all show n functions that return a value. Let’s look at an exam ple that also prints out the result of adding one to an argum ent that w as passed in to it, but does not return anything. defadd_one(x):#Functiontoadd1toxy=x+1#Printtheresultsimmediatelyprint(y) #Callthefunctionwith3astheargument,whichprints4add_one(3) In the above exam ple,add_one does not return anything at all, i.e. if you tried to w riteresult=add_one(3), nothing w ould be assigned toresult . If you then tried to print outresult , the output from that print statem ent w ould sim ply say“None” . Go ahead, try doing this and running it to see for yourself. Transitioning from sequential to procedural programming A m ajor sw itch happens in how you’re able to program w hen you learn about functions. Before now, all your program s have been sequential. This m eans that code is alw ays executed in the sam e order in w hich w e read it; from the top of the ﬁle to the bottom. 5 © 2024 H yperionD ev. All rights reserved."
+  },
+  {
+    "page": 6,
+    "section": "Content",
+    "content": "W ith functions, w e lose this. You can deﬁne a function anyw here in your ﬁle, but it w ill not run unless it’s called som ew here. This m eans that the statem ents in your code are no longer necessarily executed in the sam e order that they are w ritten. This m ay sound unnecessarily confusing, but you w ill get used to it quite quickly, and the m any beneﬁts of functions outw eigh the slight inconvenience of needing to shift your thinking. Let’s consider som e of these beneﬁts. W hy use functions? There are m any beneﬁts to using functions: ● Creating functions allow s you to have reusable code . There are m any tasks that, as a program m er, you m ay need to code repeatedly. For instance, say you w rote several lines of code that, given a ﬁlenam e, can open the ﬁle, read its contents, and print out its contents to the screen. It m ay be useful to 'save' that code som ew here so you can easily reuse it. A program m er can deﬁne a function nam edread_file , that w ould encode this logic. That w ay, the next tim e they needed to read the contents of a ﬁle, they w ould sim ply call the functionread_file . This w ill return the result of that function, w hich in this case w ill result in the output being printed on the screen. ● Functions also m ake error-checking and validating your code easier. Each m odule can be tested separately, possibly by different developers. ● Functions divide your code into manageable chunks to m ake the code easier to understand and troubleshoot. ● M odular program m ing is w here a different developer or team of developers can code each m odule (set of functions). M odular program m ing enables more rapid application development. This m eans that m any m odules can be developed sim ultaneously, increasing the speed at w hich team s can develop applications. Also, developers can reuse existing m odules in new applications, leading to m ore rapid softw are developm ent. ● Using functions can also m ake it easier to maintain applications. If a part of a system needs to be updated, the w hole program doesn’t need to be m odiﬁed. Instead, just the necessary function or functions can be changed."
+  },
+  {
+    "page": 6,
+    "section": "Scope",
+    "content": "Scope"
+  },
+  {
+    "page": 6,
+    "section": "Scope",
+    "content": "Scope is a program ’s ability to ﬁnd and use variables in a program. The rule of thum b is that a function is covered in one-w ay glass: it can see out, but no one can see in. This m eans that a function can call variables that are outside the function, but the rest of the code cannot call variables that are deﬁned inside the function. 6 © 2024 H yperionD ev. All rights reserved."
+  },
+  {
+    "page": 7,
+    "section": "Scope",
+    "content": "Let’s look at an exam ple: #Accessestheinternalvariable'total'andalsotheexternalvariable'description'defadding(a,b):total=a+breturn(description+str(total))x=2y=3description=\"Total:\" #Callstheaddingfunctionwithxandyasargumentssum=adding(x,y)#Printstheresultsprint(sum)"
+  },
+  {
+    "page": 7,
+    "section": "Output:",
+    "content": "Output:"
+  },
+  {
+    "page": 7,
+    "section": "Total:",
+    "content": "Total:5 In the code exam ple above, the function m akes use of thedescription variable from inside the function, despite the fact that this variable is not part of the function, but is outside it. This show s that the function can look outside and use variables from outside the function. N ow let’s see w hat happens if w e putdescription inside the function: #Internalvariable'description',notaccessibleoutsidethefunctiondefadding(a,b):total=a+bdescription=\"Total:\"return(str(total)) x=2y=3 #Calladdingfunctionwithxandysum=adding(x,y) #Attempttoprinttheresults(thiswillcauseanerroras'descriptionisnotdefinedoutsidethefunction'print(description+sum)"
+  },
+  {
+    "page": 7,
+    "section": "Output:",
+    "content": "Output:"
+  },
+  {
+    "page": 7,
+    "section": "NameError:",
+    "content": "NameError:name'description'isnotdefined 7 © 2024 H yperionD ev. All rights reserved."
+  },
+  {
+    "page": 8,
+    "section": "NameError:",
+    "content": "See how the program com plains that it can’t ﬁnd thedescription variable? That’s because of the ‘one-w ay glass’: the rest of the code can’t see into the function and so doesn’t know that adescription variable exists. Default values W hen creating your ow n functions, it is possible to create default argum ents. Let’s look at the exam ple below : #Functiontomultiplytwonumbers,defaultvalueof5fornum2defmultiply(num1,num2=5):total=num1*num2print(f\"{num1}*{num2}={total}\") #Usesdefaultnum2,Output:6*5=30times_5=multiply(6) H ere w e have a function that m ultiplies tw o num bers and prints a string w ith the total. The default value ofnum2 is ﬁve, so w hen w e call the function and give the argum ent six, that m eans thatnum1=6 – w e don’t need to give an argum ent fornum2 ; it w ill default to ﬁve. Therefore, w hen w e print outtimes_5, the output w ill be: 6*5=30 W hat w ould happen if w e took the default value for num 2 out and called the function w ith only one param eter? Let’s have a look: #Setsadefaultvalueoffivefornum2defmultiply(num1,num2):total=num1*num2print(f\"{num1}*{num2}={total}\") times_5=multiply(6)"
+  },
+  {
+    "page": 8,
+    "section": "Output:",
+    "content": "Output:"
+  },
+  {
+    "page": 8,
+    "section": "TypeError:",
+    "content": "TypeError:multiply()missing1requiredpositionalargument:'num2' As you can see, an error w ill be generated explaining that one input argum ent, in this casenum2 , is m issing and the function cannot run w ithout it. W hat if you w ant a function to have a default value, but you som etim es w ant to override that default value and use a different value asnum2 ? It is possible to change the 8 © 2024 H yperionD ev. All rights reserved."
+  },
+  {
+    "page": 9,
+    "section": "TypeError:",
+    "content": "value ofnum2 . At the tim e you call the function, sim ply by providing a second argum ent value. H ave a look at the exam ple below : defmultiply(num1,num2=5):total=num1*num2print(f\"{num1}*{num2}={total}\") #Overridesfault;output:6*7=42times_7=multiply(6,7) H ere, even thoughnum2 still has a default value of ﬁve, w e have overw ritten that to give it a value of seven. N ow, the output w ill be: 6*7=42 W e could also call the function using keyw ord argum ents, so the order in w hich w e w rite the argum ents doesn't m atter. For instance, using the above function: times_9=multiply(num2=6,num1=9)"
+  },
+  {
+    "page": 9,
+    "section": "Output:",
+    "content": "Output: 9*6=54 Let’s look at a sum m ary of all the variations in how w e can call a function w ith default param eters: #Bothparametershavedefaultargumentsdefmultiply(num1=6,num2=5):total=num1*num2print(f\"{num1}*{num2}={total}\") #Ifyouprovidenoargumentsbothdefaultsareusedmultiply_test=multiply()#Ifyouprovideoneargumentitgoesintothefirstvariableandoverwritesthesixmultiply_test=multiply(1)#Iftwoargumentsareprovidedbothdefaultsareoverwrittenmultiply_test=multiply(2,7)#Ifyouspecifytheparameternames,thisenablesyoutoprovidevaluesinadifferentordermultiply_test=multiply(num2=8,num1=7) 9 © 2024 H yperionD ev. All rights reserved."
+  },
+  {
+    "page": 10,
+    "section": "Output:",
+    "content": "#Ifyoudidthisanddidn'tspecifythenameoftheotherparameter,anerrorwouldbegeneratedmultiply_test=multiply(num2=8,7)"
+  },
+  {
+    "page": 10,
+    "section": "Output:",
+    "content": "Output: 6*5=301*5=52*7=147*8=56SyntaxError:positionalargumentfollowskeywordargument N ow that you know how to w rite functions let’s explore how you docum ent w hat the function does. This m ay seem obvious for these sim ple exam ples but as your functions becom e m ore com plex you need to ensure som eone else (including your future self) can easily understand the purpose of a function."
+  },
+  {
+    "page": 10,
+    "section": "Docstrings",
+    "content": "Docstrings"
+  },
+  {
+    "page": 10,
+    "section": "Docstrings",
+    "content": "Docstrings are special com m ents that provide docum entation for functions, classes, and m odules. They are enclosed in triple quotes (\"\"\" ) and appear as the ﬁrst statem ent w ithin the deﬁnition. D ocstrings serve as a valuable resource for understanding the purpose, param eters, and return values of code elem ents. They are essential for m aintaining code readability and m aking it easier for others to use and understand your code. defsquare(length):\"\"\"Calculatetheareaofasquare."
+  },
+  {
+    "page": 10,
+    "section": "Parameters:",
+    "content": "Parameters:length(float):Thelengthofonesideofthesquare."
+  },
+  {
+    "page": 10,
+    "section": "Returns:",
+    "content": "Returns:float:Theareaofthesquare.\"\"\" returnlength*length 10 © 2024 H yperionD ev. All rights reserved."
+  },
+  {
+    "page": 11,
+    "section": "Instructions",
+    "content": "Instructions Read and run the accom panying example ﬁles provided before doing the task in order to becom e m ore com fortable w ith the concepts covered in this task. Take note The task(s) below is/are auto-graded . An auto-graded task still counts tow ards your progression and graduation. Give it your best attem pt and subm it it w hen you are ready. W hen you select “Request Review ”, the task is autom atically com plete, you do not need to w ait for it to be review ed by a m entor. You w ill then receive an em ail w ith a link to a m odel answ er, as w ell as an overview of the approach taken to reach this answ er. Take som e tim e to review and com pare your w ork against the m odel answ er. This exercise w ill help solidify your understanding and provide an opportunity for reﬂection on how to apply these concepts in future projects. In the sam e em ail, you w ill also receive a link to a survey, w hich you can use to self-assess your subm ission. O nce you’ve done that, feel free to progress to the next task. 11 © 2024 H yperionD ev. All rights reserved."
+  },
+  {
+    "page": 12,
+    "section": "Instructions",
+    "content": "Auto-graded task 1 1. Create a Python ﬁle called holiday.py. 2. Your task w ill be to calculate a user’s total holiday cost, w hich includes the plane cost, hotel cost, and car rental cost. 3. First, get the follow ing user inputs: ○city_flight : The city they w ill be ﬂying to (you can create som e options for them. Rem em ber, each city w ill have different ﬂight costs). ○num_nights : The num ber of nights they w ill be staying at a hotel. ○rental_days : The num ber of days for w hich they w ill be hiring a car. 4. N ext, create the follow ing four functions: ○hotel_cost() : This function w ill takenum_nights as an argum ent and return a total cost for the hotel stay (you can choose the price per night charged at the hotel). ○plane_cost() : This function w ill takecity_flight as an argum ent and return a cost for the ﬂight."
+  },
+  {
+    "page": 12,
+    "section": "H int:",
+    "content": "H int: use if/else statem ents in the function to retrieve a price based on the chosen city. ○car_rental() : This function w ill takerental_days as an argum ent and return the total cost of the car rental (you can choose the daily rental cost). ○holiday_cost() : This function takes three argum ents:num_nights,city_flight , andrental_days . Using these three argum ents, call thehotel_cost(),plane_cost(), andcar_rental() functions w ith their respective argum ents, and ﬁnally return the total cost for the holiday. 5. Print out all the details about the holiday in a w ay that is easy to read. Try running your program w ith different com binations of input to show its com patibility w ith different options. Be sure to place ﬁles for subm ission inside your task folder and click \" Request review \" on your dashboard. 12 © 2024 H yperionD ev. All rights reserved."
+  },
+  {
+    "page": 13,
+    "section": "H int:",
+    "content": "Share your thoughts H yperionD ev strives to provide internationally excellent course content that helps you achieve your learning outcom es. D o you think w e’ve done a good job or do you think the content of this task, or this course as a w hole, can be im proved? Share your thoughts anonym ously using this form . 13 © 2024 H yperionD ev. All rights reserved."
+  }
+]

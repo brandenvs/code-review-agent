@@ -1,0 +1,1982 @@
+[
+  {
+    "text": "and",
+    "metadata": {
+      "section": "Types"
+    }
+  },
+  {
+    "text": "TO",
+    "metadata": {
+      "section": "WELCOME"
+    }
+  },
+  {
+    "text": "TASK! In this task, you’ll start to learn about data types, conditional statem ents, and logical operators.",
+    "metadata": {
+      "section": "STATEMENTS"
+    }
+  },
+  {
+    "text": "tw o m ost fundam ental data types are strings and num eric data types.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "are som e of the m ost im portant and useful data types in program m ing. W hy? Let’s think about it like this:",
+    "metadata": {
+      "section": "Strings"
+    }
+  },
+  {
+    "text": "you w ere born, your parents did not im m ediately teach you to do m athem atical sum s, not 1 + 1 or standard deviation.",
+    "metadata": {
+      "section": "W hen"
+    }
+  },
+  {
+    "text": "ﬁrst thing they taught you to do w as to speak, to say w ords, to construct full sentences, to say “M om ” or “D ad”. W ell, this is w hy w e are going to ‘teach’ the com puter to ﬁrst be able to com m unicate w ith the user – and the only w ay to do this is to have a good grasp of strings. N ext, w e consider num bers.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "encounter them daily and, in m ost cases, m ultiple tim es a day. It is likely that, through studying m athem atics at school, you w ere introduced to different types of num bers such as integers and decim al num bers, as w ell as the operations w e can perform on them, such as addition, subtraction, m ultiplication, and division.",
+    "metadata": {
+      "section": "W e"
+    }
+  },
+  {
+    "text": "program m ing languages like",
+    "metadata": {
+      "section": "Com puter"
+    }
+  },
+  {
+    "text": "provide support for storing and m anipulating m any different types of num bers.",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "w ill learn how num bers are categorised based on their nature, as w ell as how to perform arithm etic operations in Python.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "conditional statem ents, w e gain the ability to guide our code's decisions, adjusting its behaviour according to speciﬁc conditions.",
+    "metadata": {
+      "section": "W ith"
+    }
+  },
+  {
+    "text": "dynam ic attribute elevates our program s, m aking them m ore responsive and adaptable. Finally, w e’ll give som e thought to operators – sym bols that tell the com piler or interpreter to perform speciﬁc behaviours (w hether it be m athem atical, relational, or logical) and produce a ﬁnal result.",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "STRINGS? A string is a list of letters, num erals, sym bols, and special characters that are put together.",
+    "metadata": {
+      "section": "ARE"
+    }
+  },
+  {
+    "text": "values that w e can store in a string are vast. An exam ple of w hat strings can store is the surnam e, nam e, address, etc. of a person. In Python, strings m ust be w ritten within quotation m arks (“” ) for the com puter to be able to read them. sm allest possible string contains zero characters and is called an empty string (i.e.string=\"\" ).",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "of strings: name=\"Linda\" song=\"TheBirdSong\", licence_plate=\"CTA456GP\"",
+    "metadata": {
+      "section": "Exam ples"
+    }
+  },
+  {
+    "text": "are probably the m ost im portant data type in program m ing.",
+    "metadata": {
+      "section": "Strings"
+    }
+  },
+  {
+    "text": "are used as a m edium of com m unication betw een the com puter and the user.",
+    "metadata": {
+      "section": "They"
+    }
+  },
+  {
+    "text": "user can enter inform ation as a string, and the program can use the data to perform calculations and ﬁnally display the calculated answ er to the user. name=\"John\" joke=\"Knock,knock,Who'sthere?\"",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "can use any nam e for your variable, but the actual string you are assigning to the variable m ust be w ithin these\"\" (quotation m arks). Deﬁning multi-line strings Som etim es, it's useful to have long strings that can go over one line.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "use triple single quotes ('''''' ) to deﬁne a m ulti-line string. D eﬁning a m ulti-line string preserves the form atting of the string.",
+    "metadata": {
+      "section": "W e"
+    }
+  },
+  {
+    "text": "exam ple: long_string='''Thisisalongstring usingtriplequotespreserveseverythinginsideitasastring evenondifferentlinesandwithdifferent\\nspacing.'''",
+    "metadata": {
+      "section": "For"
+    }
+  },
+  {
+    "text": "can be added to one another. In the past, w e used to use a m ethod called concatenation , w hich looked like this: name=\"Peter\" surname=\"Parker\" full_name=name+surname full_name w ill now store the value “PeterParker”. The+ sym bol sim ply joins the strings. If you w anted to m ake your code m ore presentable, you could put spaces betw een the w ords. full_name=name+\"\"+surname",
+    "metadata": {
+      "section": "Strings"
+    }
+  },
+  {
+    "text": "now added a blank space in betw een the tw o strings, sofull_name w ill now store the value “Peter Parker”.",
+    "metadata": {
+      "section": "W e"
+    }
+  },
+  {
+    "text": "you cannot concatenate a string and a non-string .",
+    "metadata": {
+      "section": "Note:"
+    }
+  },
+  {
+    "text": "need to cast the non-string to a string if you w ant to concatenate it w ith another string value. If you try to run code that adds a string and a non-string, you w ill get an error.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "instance, if w e w anted to add an age of 32, w e w ould have to cast it as a string to print it. print(full_name+str(32))",
+    "metadata": {
+      "section": "For"
+    }
+  },
+  {
+    "text": "this is a clunky w ay of form atting strings.",
+    "metadata": {
+      "section": "B ut"
+    }
+  },
+  {
+    "text": "w ay of putting together a string is still used in older languages, such as Java, and does have its place, but it’s m uch better practice to use theformat() m ethod. name=\"PeterParker\" age=32 sentence=\"Mynameis{}andI'm{}yearsold.\".format(name,age) print(sentence) In the exam ple above, a set of opening and closing curly braces ({} ) serve as a placeholder for variables.",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "variables that w ill be put into those placeholders are listed in the brackets after the keyw ordformat . variables w ill ﬁll in the placeholders in the order in w hich they are listed. the code above w ill result in the follow ing output:MynameisPeterParkerandI'm32yearsold.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "that you don’t have to cast a variable that contains a num ber (age ) to a string w hen you use theformat() m ethod. F-strings",
+    "metadata": {
+      "section": "N otice"
+    }
+  },
+  {
+    "text": "shorthand for the form at function is f-strings .",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "a look at the exam ple below: name=\"PeterParker\" age=32 sentence=f\"Mynameis{name}andI'm{age}yearsold.\" print(sentence) In f-strings, instead of w riting.format() w ith the variables at the end, w e w rite anf before the string and put the variable nam es w ithin the curly brackets.",
+    "metadata": {
+      "section": "Take"
+    }
+  },
+  {
+    "text": "is a neat and concise w ay of form atting strings.",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "form atting strings, f-strings are often preferred for their readability and sim plicity.",
+    "metadata": {
+      "section": "W hen"
+    }
+  },
+  {
+    "text": "AS",
+    "metadata": {
+      "section": "NUMBERS"
+    }
+  },
+  {
+    "text": "can even store num bers as strings.",
+    "metadata": {
+      "section": "W e"
+    }
+  },
+  {
+    "text": "w e are storing a num ber (e.g. 9, 10, 231) as a string, w e are essentially storing it as a w ord.",
+    "metadata": {
+      "section": "W hen"
+    }
+  },
+  {
+    "text": "num ber w ill lose all its num ber-deﬁning characteristics. So the num ber w ill not be able to be used in any calculations.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "you can do w ith it is read or display it. In real life, som etim es w e don’t need num bers to do calculations, w e just need them for inform ation purposes.",
+    "metadata": {
+      "section": "All"
+    }
+  },
+  {
+    "text": "instance, the house num ber you live in (let’s say: 45 2nd",
+    "metadata": {
+      "section": "For"
+    }
+  },
+  {
+    "text": "2093) w on’t be used for perform ing any calculations.",
+    "metadata": {
+      "section": "U K"
+    }
+  },
+  {
+    "text": "beneﬁt w ould there be for us to ﬁnd out w hat the sum is of all the house num bers in an area?",
+    "metadata": {
+      "section": "W hat"
+    }
+  },
+  {
+    "text": "only thing w e need is to know w hat num ber the house is w hen visiting or delivering a package. num ber just needs to be visible.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "is the sam e concept w hen storing a num ber as a string; all w e w ant is to be able to take in a value and display it to the user.",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "exam ple: telephone_num=\"0411231234\"",
+    "metadata": {
+      "section": "For"
+    }
+  },
+  {
+    "text": "BE",
+    "metadata": {
+      "section": "CAN"
+    }
+  },
+  {
+    "text": "ON",
+    "metadata": {
+      "section": "PERFORMED"
+    }
+  },
+  {
+    "text": "w ith strings in",
+    "metadata": {
+      "section": "W orking"
+    }
+  },
+  {
+    "text": "is both pow erful and intuitive.",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "offer a variety of operations that can be perform ed on them, enhancing their functionality and usability.",
+    "metadata": {
+      "section": "Strings"
+    }
+  },
+  {
+    "text": "are som e of the key actions you can perform on strings: ●",
+    "metadata": {
+      "section": "H ere"
+    }
+  },
+  {
+    "text": ":",
+    "metadata": {
+      "section": "Indexing"
+    }
+  },
+  {
+    "text": "individual characters in a string. ●",
+    "metadata": {
+      "section": "Access"
+    }
+  },
+  {
+    "text": ":",
+    "metadata": {
+      "section": "Slicing"
+    }
+  },
+  {
+    "text": "a substring from a string. ●",
+    "metadata": {
+      "section": "Extract"
+    }
+  },
+  {
+    "text": "slicing :",
+    "metadata": {
+      "section": "Extended"
+    }
+  },
+  {
+    "text": "a substring w ith a speciﬁc step. ●",
+    "metadata": {
+      "section": "Extract"
+    }
+  },
+  {
+    "text": "string methods :",
+    "metadata": {
+      "section": "Using"
+    }
+  },
+  {
+    "text": "built-in m ethods to m anipulate and analyse strings.",
+    "metadata": {
+      "section": "U tilise"
+    }
+  },
+  {
+    "text": "can uselen() to get the num ber of characters in a string or the actual length of a string. Thelen() function is a general function that w orks w ith various data types, including strings, to return the num ber of item s in an object.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "print statem ent below prints out 12, because \"H ello w orld!\" is 12-characters long, including punctuation and spaces. print(len(\"HelloWorld!\"))",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "12",
+    "metadata": {
+      "section": "Output:"
+    }
+  },
+  {
+    "text": "can also slice a string.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "in",
+    "metadata": {
+      "section": "Slicing"
+    }
+  },
+  {
+    "text": "extracts characters from a string, based on a starting index and ending index. It enables you to extract m ore than one character or “chunk” of characters from a string.",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "print statem ent below w ill print out a piece of the string. It w ill start at position/index1 and end at position/index4 (w hich is not included). greeting=\"Hello\" print(greeting[1:4])",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "ell",
+    "metadata": {
+      "section": "Output:"
+    }
+  },
+  {
+    "text": "can even use negative num bers inside the brackets.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "characters are indexed from right to left using negative num bers, w here-1 is the rightm ost index and so on.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "negative indices is an easy w ay of starting at the end of the string instead of the beginning.",
+    "metadata": {
+      "section": "U sing"
+    }
+  },
+  {
+    "text": "w ay,-3 m eans “third character from the end”.",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "at the exam ple below.",
+    "metadata": {
+      "section": "Look"
+    }
+  },
+  {
+    "text": "string is printed from the third-to-last character, “ l ”, all the w ay to the end of the string.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "that you don’t need to specify the end of the index range: greeting=\"Hello\" print(greeting[-3:])",
+    "metadata": {
+      "section": "N otice"
+    }
+  },
+  {
+    "text": "llo In the exam ple below, the slice begins from position0 and goes up to, but not including, position1 .",
+    "metadata": {
+      "section": "Output:"
+    }
+  },
+  {
+    "text": "is because if the starting position is left blank, it w ill by default start at0 . greeting=\"Hello\" print(greeting[:1])",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "H In the next exam ple, the slice begins from position1 , includes position1 , then continues to the end of the string and skips/steps over every other position.",
+    "metadata": {
+      "section": "Output:"
+    }
+  },
+  {
+    "text": "is know n as an extended slice.",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "syntax for an extended slice is[begin:end:step] . If the end is left out, the slice continues to the end of the string. greeting=\"Hello\" print(greeting[1::2])",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "el In this ﬁnal exam ple, you can think of the ‘-1 ’ as a reverse order argum ent.",
+    "metadata": {
+      "section": "Output:"
+    }
+  },
+  {
+    "text": "slice begins from position4 , continues to position1 (not included), and skips/steps backw ards one position at a tim e: greeting=\"Hello\" print(greeting[4:1:-1])",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "oll",
+    "metadata": {
+      "section": "Output:"
+    }
+  },
+  {
+    "text": "can print a string in reverse by using[::-1] .",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "that the syntax for an extended slice is[begin:end:step] .",
+    "metadata": {
+      "section": "Rem em ber"
+    }
+  },
+  {
+    "text": "not including a beginning and end, and specifying a step of-1 , the slice w ill cover the entire string, backw ards, so the string w ill be reversed.",
+    "metadata": {
+      "section": "B y"
+    }
+  },
+  {
+    "text": "can ﬁnd out m ore about extended slices here .",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "slicing a string does not m odify the original string.",
+    "metadata": {
+      "section": "Note:"
+    }
+  },
+  {
+    "text": "can capture a slice from one variable in a separate variable. new_string=\"Helloworld!\" fizz=new_string[0:5] print(fizz) print(new_string)",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "slicing and storing the resulting substring in another variable, you can have both the w hole string and the substring handy for quick, easy access.",
+    "metadata": {
+      "section": "B y"
+    }
+  },
+  {
+    "text": "TO",
+    "metadata": {
+      "section": "METHODS"
+    }
+  },
+  {
+    "text": "program m ing languages provide built-in functions to m anipulate strings, i.e., you can concatenate strings, search w ithin strings, extract substrings, and perform various other operations.",
+    "metadata": {
+      "section": "M ost"
+    }
+  },
+  {
+    "text": "is m ore to be learned about this topic, but for now w e w ill stop here. If you’re very keen to look ahead, you can ﬁnd a num ber of resources online to learn about string m ethods .",
+    "metadata": {
+      "section": "There"
+    }
+  },
+  {
+    "text": ": this resource w ill com e in handy for your ﬁrst auto-graded task later on. N ow, let’s m ove on to learning about num eric data types.",
+    "metadata": {
+      "section": "Hint"
+    }
+  },
+  {
+    "text": "IN",
+    "metadata": {
+      "section": "NUMBERS"
+    }
+  },
+  {
+    "text": "are three distinct num eric data types in",
+    "metadata": {
+      "section": "There"
+    }
+  },
+  {
+    "text": "integers, ﬂoating-point num bers, and com plex num bers. ●",
+    "metadata": {
+      "section": "Python:"
+    }
+  },
+  {
+    "text": ": these are synonym ous w ith w hole num bers.",
+    "metadata": {
+      "section": "Integers"
+    }
+  },
+  {
+    "text": "w hich are stored as this type do not contain a fractional part or decim al.",
+    "metadata": {
+      "section": "N um bers"
+    }
+  },
+  {
+    "text": "can either be positive or negative, and are norm ally used for counting or sim ple calculations.",
+    "metadata": {
+      "section": "Integers"
+    }
+  },
+  {
+    "text": "instance, you can store the num ber of item s you w ish to purchase from a store as an integer, e.g.num=int(\"-12\") . ●",
+    "metadata": {
+      "section": "For"
+    }
+  },
+  {
+    "text": ": decim al num bers or num bers w hich contain a fractional com ponent are stored as ﬂoats.",
+    "metadata": {
+      "section": "Floats"
+    }
+  },
+  {
+    "text": "are useful w hen you need m ore precision, such as w hen storing m easurem ents for a building or am ounts of m oney.",
+    "metadata": {
+      "section": "They"
+    }
+  },
+  {
+    "text": "m ay also be in scientiﬁc notation, w ithE ore indicating the pow er of 10, e.g.x=float(\"15.20\") ,y=float(\"-32.54e100\") . ●",
+    "metadata": {
+      "section": "Floats"
+    }
+  },
+  {
+    "text": ": com plex num bers have a real and im aginary part, w hich are each a ﬂoating-point num ber, e.g.c=complex(\"45.j\") .",
+    "metadata": {
+      "section": "Complex"
+    }
+  },
+  {
+    "text": "IN",
+    "metadata": {
+      "section": "NUMBERS"
+    }
+  },
+  {
+    "text": "you declare a variable,",
+    "metadata": {
+      "section": "W hen"
+    }
+  },
+  {
+    "text": "w ill already know if it is a ﬂoat or an integer based on its characteristics. If you use decim als, it w ill autom atically be a ﬂoat and if there are no decim als, then it w ill be an integer. class_list=25#integer interest_rate=12.23#float",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "To cast betw een num bers, m ake use of theint() orfloat() functions, depending on w hich is needed. num1=12 num2=99.99 print(float(num1)) #Convertingfloatstoints,asbelow,causesdataloss.int()removesvalues #afterthedecimalpoint,returningonlyawholenumber. print(int(num2))",
+    "metadata": {
+      "section": "TYPES"
+    }
+  },
+  {
+    "text": "calculations w ith num bers in",
+    "metadata": {
+      "section": "D oing"
+    }
+  },
+  {
+    "text": "w orks sim ilarly to the w ay they w ould in regular m aths. total=2+4 print(total)#Printsout6 total=2+4 print(total)#Printsout6",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "only difference betw een calculations in real m athem atics and program m ing is the sym bols you use:",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "operations",
+    "metadata": {
+      "section": "Arithmetic"
+    }
+  },
+  {
+    "text": "used in",
+    "metadata": {
+      "section": "Symbol"
+    }
+  },
+  {
+    "text": "adds values on either side of the operator.+",
+    "metadata": {
+      "section": "Addition:"
+    }
+  },
+  {
+    "text": "subtracts the value on the right of the operator from the value on the left. –",
+    "metadata": {
+      "section": "Subtraction:"
+    }
+  },
+  {
+    "text": ": m ultiplies values on either side of the operator.*",
+    "metadata": {
+      "section": "Multiplication"
+    }
+  },
+  {
+    "text": "divides the value on the left of the operator by the value on the right./",
+    "metadata": {
+      "section": "Division:"
+    }
+  },
+  {
+    "text": "divides the value on the left of the operator by the value on the right and returns the rem ainder.%",
+    "metadata": {
+      "section": "Modulus:"
+    }
+  },
+  {
+    "text": "perform s an exponential calculation, i.e. calculates the answ er of the value on the left to the pow er of the value on the right.**",
+    "metadata": {
+      "section": "Exponent:"
+    }
+  },
+  {
+    "text": "In Python, num erical data types play a crucial role in perform ing m athem atical operations and calculations. To w ork w ith num erical data effectively,",
+    "metadata": {
+      "section": "FUNCTIONS"
+    }
+  },
+  {
+    "text": "offers a variety of built-in functions (pre-w ritten code) and libraries that can be utilised. B uilt-in functions are readily available w ithin and provide fundam ental m athem atical operations, w hile themath m odule (a ﬁle containing code) needs to be im ported (explicitly loaded into your program) and offers an extensive collection of specialised m athem atical functions.",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "of the m ost com m only used functions are listed in the tables below. Built-in mathematical functions:",
+    "metadata": {
+      "section": "Som e"
+    }
+  },
+  {
+    "text": "round()",
+    "metadata": {
+      "section": "Example"
+    }
+  },
+  {
+    "text": "a ﬂoating-point num ber to the nearest w hole num ber, or decim al places as speciﬁed by the second argum ent.number=66.6564544 print(round(number,2)) #",
+    "metadata": {
+      "section": "Rounds"
+    }
+  },
+  {
+    "text": "output66.66 min()",
+    "metadata": {
+      "section": "W ill"
+    }
+  },
+  {
+    "text": "the sm allest value from an iterable, such as a list or tuple.numbers_list=[6,4,66,35,1] print(min(numbers_list)) #",
+    "metadata": {
+      "section": "Returns"
+    }
+  },
+  {
+    "text": "output1 max()",
+    "metadata": {
+      "section": "W ill"
+    }
+  },
+  {
+    "text": "the largest value from an iterable, such as a list or tuple.numbers_list=[6,4,66,35,1] print(max(numbers_list)) #",
+    "metadata": {
+      "section": "Returns"
+    }
+  },
+  {
+    "text": "output66 sum()",
+    "metadata": {
+      "section": "W ill"
+    }
+  },
+  {
+    "text": "the total sum of all elem ents in iterable, such as a list or tuple.numbers_list=[6,4,66,35,1] print(sum(numbers_list)) #",
+    "metadata": {
+      "section": "Calculates"
+    }
+  },
+  {
+    "text": "output112",
+    "metadata": {
+      "section": "W ill"
+    }
+  },
+  {
+    "text": "functions available through themath module: To use the functions in themath m odule, add this line of code to the top of your program: importmath",
+    "metadata": {
+      "section": "Mathematical"
+    }
+  },
+  {
+    "text": "math.floor()",
+    "metadata": {
+      "section": "Example"
+    }
+  },
+  {
+    "text": "a num ber dow n.print(math.floor(30.3333)) #",
+    "metadata": {
+      "section": "Rounds"
+    }
+  },
+  {
+    "text": "output30 math.ceil()",
+    "metadata": {
+      "section": "W ill"
+    }
+  },
+  {
+    "text": "a num ber up.print(math.ceil(30.3333)) #",
+    "metadata": {
+      "section": "Rounds"
+    }
+  },
+  {
+    "text": "output31.0 math.trunc()",
+    "metadata": {
+      "section": "W ill"
+    }
+  },
+  {
+    "text": "off the decim al part of the ﬂoat.print(math.trunc(30.33333)) #",
+    "metadata": {
+      "section": "Cuts"
+    }
+  },
+  {
+    "text": "output30 math.sqrt()",
+    "metadata": {
+      "section": "W ill"
+    }
+  },
+  {
+    "text": "the square root of a num ber.print(math.sqrt(4)) #",
+    "metadata": {
+      "section": "Finds"
+    }
+  },
+  {
+    "text": "output2.0 math.pi()",
+    "metadata": {
+      "section": "W ill"
+    }
+  },
+  {
+    "text": "the value for pi w here pi is the num ber used to calculate the area of a circle.print(math.pi) #",
+    "metadata": {
+      "section": "Returns"
+    }
+  },
+  {
+    "text": "output3.141592653589793",
+    "metadata": {
+      "section": "W ill"
+    }
+  },
+  {
+    "text": "free to explore som e m ore functions in themath m odule here . IF",
+    "metadata": {
+      "section": "Feel"
+    }
+  },
+  {
+    "text": "Let’s consider how w e m ake decisions in real life.",
+    "metadata": {
+      "section": "CODE"
+    }
+  },
+  {
+    "text": "you are faced w ith a problem, you have to see w hat the problem entails.",
+    "metadata": {
+      "section": "W hen"
+    }
+  },
+  {
+    "text": "you ﬁgure out the crux of the problem, you then follow through w ith a w ay to solve this problem.",
+    "metadata": {
+      "section": "O nce"
+    }
+  },
+  {
+    "text": "a com puter how to solve problem s w orks in a sim ilar w ay.",
+    "metadata": {
+      "section": "Teaching"
+    }
+  },
+  {
+    "text": "tell the com puter to look out for a certain problem and how to solve the problem w hen faced w ith it. are now going to learn about a vital concept w hen it com es to program m ing: w ill be teaching the com puter how to m ake decisions for itself using som ething called an if statement . As the nam e suggests, this is essentially a question. If statements can com pare tw o or m ore variables or scenarios, and perform a certain action based on the outcom e of that com parison. If statements contain a condition, as you can see in the exam ple below.",
+    "metadata": {
+      "section": "W e"
+    }
+  },
+  {
+    "text": "are statem ents that can only evaluate to",
+    "metadata": {
+      "section": "Conditions"
+    }
+  },
+  {
+    "text": "or",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": ". If the condition is",
+    "metadata": {
+      "section": "False"
+    }
+  },
+  {
+    "text": ", then the indented statem ents are executed. If the condition is",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": ", then the indented statem ents are skipped. In Python, if statements have the follow ing general syntax: ifcondition: indentedstatements H ere’s a code exam ple of a",
+    "metadata": {
+      "section": "False"
+    }
+  },
+  {
+    "text": "if statement : num=10 ifnum<12:#Don'tforgetthecolon! print(\"thevariablenumislowerthan12\")",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "if statement uses the< (less than) operator to check if the value of the variablenum is less than 12. If it is, then the program w ill print the sentence letting us know.",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "w as greater than 12, then it w ould not print out that sentence.",
+    "metadata": {
+      "section": "Ifnum"
+    }
+  },
+  {
+    "text": "is a slightly contrived exam ple for the sake of sim plicity, because w e already knownum is less than 12, having assigned it the value 10. H ow ever, im agine that the value ofnum w as input at run-tim e by a user; in that case, w e could not know in advance w hat they w ould enter, and the condition the if statement evaluates w ould offer m ore value.",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "that as all user input is assigned the data type string , w e need to cast the input to anint if w e w ant it to perform operations based on its value.",
+    "metadata": {
+      "section": "N ote"
+    }
+  },
+  {
+    "text": "the exam ple below: num=int(input(\"Pleaseinputanumberbetween1and100\")) ifnum<12:#Don'tforgetthecolon! print(\"Thevalueyouenteredislowerthan12\")",
+    "metadata": {
+      "section": "See"
+    }
+  },
+  {
+    "text": "the following important syntax rules for an if statement : ● In Python, the colon is follow ed by code that can only run if the statem ent's condition is",
+    "metadata": {
+      "section": "Notice"
+    }
+  },
+  {
+    "text": ". ●",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": "indentation (w here each line of code is situated in relation to the surrounding code) is there to dem onstrate that the program 's logic w ill follow the path it indicates.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "indented line w ill run if the program 's if statement 's condition is",
+    "metadata": {
+      "section": "Every"
+    }
+  },
+  {
+    "text": ". ● In Python, w hen w riting a conditional statem ent such as the if statement above, you have the option of putting the condition in brackets if you’d prefer to (i.e.if(num<12): ).",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": "your code w ill still run w ithout the brackets, using brackets can help w ith readability w hen your code gets m ore com plicated, w hich is a very im portant consideration in coding.",
+    "metadata": {
+      "section": "W hile"
+    }
+  },
+  {
+    "text": "m ay have also noticed the less than (< ) sym bol in the previous code exam ples (ifnum<12: ). As a program m er, it's im portant to rem em ber the basic logical operators.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "use com parison operators to com pare values or variables in program m ing.",
+    "metadata": {
+      "section": "W e"
+    }
+  },
+  {
+    "text": "operators w ork w ell w ith if statements, if-else statements , and loops to control w hat goes on in our program s.",
+    "metadata": {
+      "section": "These"
+    }
+  },
+  {
+    "text": "four basic com parative operators are: ● greater than> ● less than< ● equal to== ● not!",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "note that the sym bol w e use for equal to is ‘== ’, and not ‘= ’.",
+    "metadata": {
+      "section": "Take"
+    }
+  },
+  {
+    "text": "is because== literally m eans ‘equals’ (e.g.,i==4 m eansi is equal to4 ).",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "use== in conditional statem ents.",
+    "metadata": {
+      "section": "W e"
+    }
+  },
+  {
+    "text": "the other hand,= is used to assign a value to a variable (e.g.i=\"blue\" m eans I assign the stringblue toi ). It is a subtle but im portant difference. As you can see, the if statement is pretty lim ited as is.",
+    "metadata": {
+      "section": "O n"
+    }
+  },
+  {
+    "text": "can only really m ake decisions that result in one of tw o possible outcom es.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "happens if w e have m ore options? if one decision w ill have further ram iﬁcations and w e w ill need to m ake m ore decisions to fully solve the problem at hand?",
+    "metadata": {
+      "section": "W hat"
+    }
+  },
+  {
+    "text": "structures are not lim ited to if statements .",
+    "metadata": {
+      "section": "Control"
+    }
+  },
+  {
+    "text": "w ill soon learn how to expand on an if statement by adding an else statement or an elif statement (else if). First, how ever, let’s ﬁnd out about the boolean data type.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "BOOLEANS?",
+    "metadata": {
+      "section": "ARE"
+    }
+  },
+  {
+    "text": "w ere developed by an",
+    "metadata": {
+      "section": "Booleans"
+    }
+  },
+  {
+    "text": "m athem atician and com puter pioneer nam ed",
+    "metadata": {
+      "section": "English"
+    }
+  },
+  {
+    "text": "(1815 – 1864). A boolean data type can only store one of tw o values, nam ely",
+    "metadata": {
+      "section": "B oole"
+    }
+  },
+  {
+    "text": "or",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": ".",
+    "metadata": {
+      "section": "False"
+    }
+  },
+  {
+    "text": "byte is reserved for storing this data type.",
+    "metadata": {
+      "section": "O ne"
+    }
+  },
+  {
+    "text": "use booleans w hen checking if one of tw o outcom es is",
+    "metadata": {
+      "section": "W e"
+    }
+  },
+  {
+    "text": ".",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": "instance: is the car insured? Is the passw ord correct? Is the person lying?",
+    "metadata": {
+      "section": "For"
+    }
+  },
+  {
+    "text": "you love m e?",
+    "metadata": {
+      "section": "D o"
+    }
+  },
+  {
+    "text": "the inform ation is stored in a variable, it’s easy to use loops and if statements to check an extensive sam ple of item s and base your calculations on the result of a boolean value.",
+    "metadata": {
+      "section": "O nce"
+    }
+  },
+  {
+    "text": "a boolean to a variable is very sim ple.",
+    "metadata": {
+      "section": "Assigning"
+    }
+  },
+  {
+    "text": "declare the variable nam e and then choose its starting value.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "value can then be changed as the program runs.",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "exam ple: pass_word=False pass_word=True",
+    "metadata": {
+      "section": "For"
+    }
+  },
+  {
+    "text": "IN",
+    "metadata": {
+      "section": "BOOLEANS"
+    }
+  },
+  {
+    "text": "statem ents allow you to use booleans to their full potential.",
+    "metadata": {
+      "section": "Control"
+    }
+  },
+  {
+    "text": "can you use a boolean value once you have declared it?",
+    "metadata": {
+      "section": "H ow"
+    }
+  },
+  {
+    "text": "is w here the if statement com es into play. Let’s look at a sim ple decision w e m ight m ake in our everyday lives. If it is cold outside, you w ould likely w ear a jacket. H ow ever, if it is not cold, you m ight ﬁnd a jacket unnecessary. is a type of branching: if one condition is true, do one thing, and if the condition is false, do som ething else. type of branching decision-m aking can be im plem ented in",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "program m ing using if–else and if-elif-else statem ents. Let’s try another exam ple.",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "you are about to leave your house, do you alw ays take an um brella? N o, you only take an um brella if it is raining outside.",
+    "metadata": {
+      "section": "W hen"
+    }
+  },
+  {
+    "text": "this is another very rudim entary exam ple of decision-m aking w here there are only tw o outcom es, keep in m ind that w e can apply these basic principles to create m ore com plex program s. H ere’s the scenario represented in code: umbrella=\"Leavemeathome\" rain=False ifrain: umbrella=\"Bringmewith\"",
+    "metadata": {
+      "section": "Although"
+    }
+  },
+  {
+    "text": "a look at line three in the exam ple above.",
+    "metadata": {
+      "section": "Take"
+    }
+  },
+  {
+    "text": "is shorthand forifrain==True: , but because the default of a boolean is",
+    "metadata": {
+      "section": "That"
+    }
+  },
+  {
+    "text": ", to w rite all of that is redundant, so w e only use== w ith boolean conditionals if a condition speciﬁcally needs to be",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": ".",
+    "metadata": {
+      "section": "False"
+    }
+  },
+  {
+    "text": "OF IF-ELSE",
+    "metadata": {
+      "section": "STRUCTURE"
+    }
+  },
+  {
+    "text": "In addition to the basic if statement functionality, it is possible to check the condition supplied to the if statement and not only do som ething if it evaluates to",
+    "metadata": {
+      "section": "STATEMENTS"
+    }
+  },
+  {
+    "text": ", but do som ething else if it is",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": ", as w e discussed w hen talking about branching decisions.",
+    "metadata": {
+      "section": "False"
+    }
+  },
+  {
+    "text": "is called an if-else statement .",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "basic structure of an if-else statement can be represented by this diagram:",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "(Toppr, 2021) https://www.toppr.com /guides/python-guide/tutorials/python-ﬂow-control/if-elif-else/python-if-if-else-if-elif-else-and-nested-if-statem ent/",
+    "metadata": {
+      "section": "Flowchart"
+    }
+  },
+  {
+    "text": "exam ple below extends the earlier if statement exam ple to include else : num=int(input(\"Pleaseinputanumberbetween1and100\")) ifnum<12:#Don'tforgetthecolon! print(\"Thevalueyouenteredislowerthan12\") else: print(\"Thevalueyouenteredishigherthan12\")",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "last piece of the puzzle w hen it com es to if statements is called an elif statement .",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "stands for “ else if ”.",
+    "metadata": {
+      "section": "Elif"
+    }
+  },
+  {
+    "text": "this statem ent, you can add m ore conditions to the if statement , and in doing so, you can test m ultiple param eters in the sam e code block.",
+    "metadata": {
+      "section": "W ith"
+    }
+  },
+  {
+    "text": "the else statement , you can have m ultiple elif statements in an if-elif-else statement . If the condition of the if statement is",
+    "metadata": {
+      "section": "U nlike"
+    }
+  },
+  {
+    "text": ", the condition of the next elif statement is checked. If the ﬁrst elif statement condition is also , the condition of the next elif statement is checked, etc. If all the elif conditions are , the else statement and its indented block of statem ents is executed. In Python, if-elif-else statements have the follow ing syntax: ifcondition1: indentedStatement(s) elifcondition2: indentedStatement(s) elifcondition3: indentedStatement(s) elifcondition4: indentedStatement(s) else: indentedStatement(s)",
+    "metadata": {
+      "section": "False"
+    }
+  },
+  {
+    "text": "happens if w e w ant to test m ultiple conditions?",
+    "metadata": {
+      "section": "W hat"
+    }
+  },
+  {
+    "text": "is w here elif com es in. num=int(input(\"Pleaseinputanumberbetween1and100:\")) ifnum<12: print(\"Thevalueyouenteredislowerthan12\") elifnum>13: print(\"Thevalueyouenteredishigherthan13\") elifnum<13: print(\"Thevalueyouenteredislowerthan13\") else: print(\"Thevalueyouenteredis13\")",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "copying and pasting the code above into VS",
+    "metadata": {
+      "section": "Try"
+    }
+  },
+  {
+    "text": "and running it w ith different num bers as input.",
+    "metadata": {
+      "section": "Code"
+    }
+  },
+  {
+    "text": "you’re happy, you can follow the logic, try changing the num bers used and creating different output strings until you really feel com fortable w ith how if-elif-else w orks.",
+    "metadata": {
+      "section": "O nce"
+    }
+  },
+  {
+    "text": "that you can com bine if , else , and elif into one big statem ent.",
+    "metadata": {
+      "section": "Rem em ber"
+    }
+  },
+  {
+    "text": "is w hat w e refer to as a conditional statement .",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "important points to note on the syntax of if-elif-else statements : ●",
+    "metadata": {
+      "section": "Some"
+    }
+  },
+  {
+    "text": "sure that the if-elif-else statements end w ith a colon (the ‘ : ’ sym bol). ●",
+    "metadata": {
+      "section": "M ake"
+    }
+  },
+  {
+    "text": "that your indentation is done correctly (i.e., statem ents that are part of a certain control structure's ‘code block’ need the sam e indentation). ● To have an elif , you m ust have an if above it. ● To have an else , you m ust have an if or elif above it. ●",
+    "metadata": {
+      "section": "Ensure"
+    }
+  },
+  {
+    "text": "can't have an else w ithout an if – think about it! ● can have m any elif statements under an if , but you m ay only have one else right at the bottom. It's like the fail-safe statem ent that executes if the other if-elif statem ents all evaluate to",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "!",
+    "metadata": {
+      "section": "False"
+    }
+  },
+  {
+    "text": "this overview of the basic structure you’re learning.",
+    "metadata": {
+      "section": "Rem em ber"
+    }
+  },
+  {
+    "text": "TO",
+    "metadata": {
+      "section": "EXAMPLES"
+    }
+  },
+  {
+    "text": "a look at the follow ing exam ple: current_time=12 ifcurrent_time<11: print(\"Timeforashortjog–let'sgo!\") else: print(\"It'safter11–it'slunchtime.\") If the condition of the if statement is",
+    "metadata": {
+      "section": "Take"
+    }
+  },
+  {
+    "text": "(current_time ends up being greater than11 ), the else statement w ill be executed. In this exam ple, w hat do you think w ould happen if the tim e w as set to 11 exactly? Copy, paste into VS Code, and run the code sam ple above.",
+    "metadata": {
+      "section": "False"
+    }
+  },
+  {
+    "text": "you think w e should am end the code at all to handle this case?",
+    "metadata": {
+      "section": "D o"
+    }
+  },
+  {
+    "text": "w ould you do that?",
+    "metadata": {
+      "section": "H ow"
+    }
+  },
+  {
+    "text": "adding to the code sam ple and running it.",
+    "metadata": {
+      "section": "Try"
+    }
+  },
+  {
+    "text": "exam ple of using an else statement w ith an if statement can be found below, but this one includes an elif .",
+    "metadata": {
+      "section": "Another"
+    }
+  },
+  {
+    "text": "value that the variablehour holds determ ines w hich string is assigned to the variablegreeting : hour=18 ifhour<18: greeting=\"Goodday\" elifhour<20: greeting=\"Goodevening\" else: greeting=\"Goodnight\" print(greeting)",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "could you change the code above to get the value ofhour from the user, so that the output of the program w ould be dependent on the user’s input?",
+    "metadata": {
+      "section": "H ow"
+    }
+  },
+  {
+    "text": "w ould you have to do to the input value to use it in the logical tests of the conditions? Copy, paste, and run the code sam ple above ﬁrst, and then try am ending it to accept and act on user input. H opefully, by now, you are starting to see the im m ense value that if-elif-else statem ents can offer to you as a program m er! LET’S",
+    "metadata": {
+      "section": "W hat"
+    }
+  },
+  {
+    "text": "are sym bols that tell the com puter w hich m athem atical calculations to perform or w hich com parisons to m ake.",
+    "metadata": {
+      "section": "O perators"
+    }
+  },
+  {
+    "text": "can com bine the greater than, less than, and not operator w ith the equals operator and form three new operations. ● greater than or equal to>= ● less than or equal to<= ● not equal to!=",
+    "metadata": {
+      "section": "W e"
+    }
+  },
+  {
+    "text": "strings: my_name=\"Tom\" ifmy_name==\"Tom\": print(\"Iwaslookingforyou\") num bers: num1=10 num2=20 ifnum1>=num2:#Thesymbolfor'greaterthanorequalto'is>= print(\"It'snotpossiblethat10isbiggerthanorequalto20.\") elifnum1<=num2:#Thesymbolfor'lessthanorequalto'is<= print(\"10islessthanorequalto20.\") elifnum1!=num2:#Thesymbolfor'notequalto'is!= print(\"Thisisalsotruesince10isn'tequalto20,buttheelifstatementbeforecomesfirstandistrue,soPythonwillexecutethatandnevergettothisone!\") elifnum1==num2:#Thesymbolfor'equalto'is== print(\"Willneverexecutethisprintstatement...\")",
+    "metadata": {
+      "section": "Com paring"
+    }
+  },
+  {
+    "text": "program w ill check the ﬁrst part of the if statement (isnum1 bigger than or equal tonum2 ?). If it is not, then it goes into the ﬁrst elif statement and checks ifnum1 is less than or equal tonum2 . If it is not, then it goes into the next elif statement , etc. In the exam ple above, the ﬁrst elif w ill execute.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "A logical operator is another type of operator that is used to control the ﬂow of a program.",
+    "metadata": {
+      "section": "OPERATORS"
+    }
+  },
+  {
+    "text": "operators are usually found as part of a control statem ent such as an if statement . operators basically allow a program to m ake a decision based on m ultiple conditions; for instance, if you w ould like to test m ore than one condition in an if statement.",
+    "metadata": {
+      "section": "Logical"
+    }
+  },
+  {
+    "text": "three logical operations are:",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "and",
+    "metadata": {
+      "section": "Explanation"
+    }
+  },
+  {
+    "text": "conditions need to be",
+    "metadata": {
+      "section": "B oth"
+    }
+  },
+  {
+    "text": "for the w hole statem ent to be (also called the conjunction operation ). or At least one condition needs to be for the w hole statem ent to be (also called the disjunction operation ). not",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": "statem ent is",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "if the condition is",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": "(only requires one condition).",
+    "metadata": {
+      "section": "False"
+    }
+  },
+  {
+    "text": "'and ' and 'or ' operators require tw o operands, w hile the 'not ' operator requires one. Let's take a real-life situation.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "buying item s at a store, tw o criteria need to be m et.",
+    "metadata": {
+      "section": "W hen"
+    }
+  },
+  {
+    "text": "item needs to be in stock and you need to have enough m oney to pay for it.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "is an exam ple of a conjunction operation , w here both conditions need to be",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "for the w hole statem ent to be .",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": "w ould be represented using theand operation. Let’s look at another situation. A person could receive a good m ark at school either because they are very bright or because they studied hard. In this instance, either one of the options can be",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": ", or both can be , but at least one needs to be .",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": "is a disjunction operation , w here at least one of the conditions needs to be m et for the w hole statem ent to be",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": ".",
+    "metadata": {
+      "section": "True"
+    }
+  },
+  {
+    "text": "w ould be represented using theor operation.",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "of anand operation: team1_score=3 team2_score=2 game=\"Over\" if(team1_score>team2_score)and(game==\"Over\"): print(\"CongratulationsTeam1,youhavewonthematch!\") of anor operation: speed=int(input(\"Howmanykilometresperhourareyoutravellingat?\")) belt=input(\"Areyouwearingasafetybelt?\") if(speed>80)or(belt!=\"Yes\"): print(\"SorrySir,butIhavetogiveyouatrafficfine.\")",
+    "metadata": {
+      "section": "Exam ple"
+    }
+  },
+  {
+    "text": "arithm etic operators in",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "are as follow s:",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "operations",
+    "metadata": {
+      "section": "Arithmetic"
+    }
+  },
+  {
+    "text": "used in",
+    "metadata": {
+      "section": "Symbol"
+    }
+  },
+  {
+    "text": "adds values on either side of the operator. +",
+    "metadata": {
+      "section": "Addition:"
+    }
+  },
+  {
+    "text": "subtracts the value on the right of the operator from the value on the left. –",
+    "metadata": {
+      "section": "Subtraction:"
+    }
+  },
+  {
+    "text": ": m ultiplies values on either side of the operator. *",
+    "metadata": {
+      "section": "Multiplication"
+    }
+  },
+  {
+    "text": "divides the value on the left of the operator by the value on the right. /",
+    "metadata": {
+      "section": "Division:"
+    }
+  },
+  {
+    "text": "divides the value on the left of the operator by the value on the right and returns the rem ainder. E.g.4%2==0 but5%2==1 . %",
+    "metadata": {
+      "section": "Modulus:"
+    }
+  },
+  {
+    "text": "perform s an exponential calculation, i.e. calculates the answ er of the value on the left to the pow er of the value on the right. **",
+    "metadata": {
+      "section": "Exponent:"
+    }
+  },
+  {
+    "text": "operations",
+    "metadata": {
+      "section": "Assignment"
+    }
+  },
+  {
+    "text": "used in",
+    "metadata": {
+      "section": "Symbol"
+    }
+  },
+  {
+    "text": ": set the value of the thing on the left to that of the thing on the right. e.g.n=7 = Plus-equals: adds1 to the variable for each iteration. e.g.n+=1 is shorthand forn=n+1 . (This is particularly useful w hen using loops, as you w ill eventually see.) += Minus-equals: m inuses1 from the variable for each iteration. e.g.n –=1 is shorthand forn=n –1 . – =",
+    "metadata": {
+      "section": "Equals"
+    }
+  },
+  {
+    "text": "you get started, w e strongly suggest you use an editor such as VS",
+    "metadata": {
+      "section": "B efore"
+    }
+  },
+  {
+    "text": "to open all text ﬁles (.txt) and",
+    "metadata": {
+      "section": "Code"
+    }
+  },
+  {
+    "text": "ﬁles (.py). First, read the accom panying exam ple ﬁles.",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "exam ples should help you understand som e sim ple Python.",
+    "metadata": {
+      "section": "These"
+    }
+  },
+  {
+    "text": "m ay run the exam ples to see the output.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "free to also w rite and run your ow n exam ple code before doing the tasks to becom e m ore com fortable w ith Python.",
+    "metadata": {
+      "section": "Feel"
+    }
+  },
+  {
+    "text": "tasks below are auto-graded . An auto-graded task still counts tow ards your progression and graduation.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "it your best attem pt and subm it it w hen you are ready.",
+    "metadata": {
+      "section": "G ive"
+    }
+  },
+  {
+    "text": "you select “Request Review ”, the task is autom atically com plete - you do not need to w ait for it to be review ed by a m entor.",
+    "metadata": {
+      "section": "W hen"
+    }
+  },
+  {
+    "text": "w ill then receive an em ail w ith a link to a m odel answ er, as w ell as an overview of the approach taken to reach this answ er.",
+    "metadata": {
+      "section": "You"
+    }
+  },
+  {
+    "text": "som e tim e to review and com pare your w ork against the m odel answ er.",
+    "metadata": {
+      "section": "Take"
+    }
+  },
+  {
+    "text": "exercise w ill help solidify your understanding and provide an opportunity for reﬂection on how to apply these concepts in future projects. In the sam e em ail, you w ill also receive a link to a survey, w hich you can use to self-assess your subm ission.",
+    "metadata": {
+      "section": "This"
+    }
+  },
+  {
+    "text": "you’ve done that, feel free to progress to the next task. Auto-graded task 1",
+    "metadata": {
+      "section": "O nce"
+    }
+  },
+  {
+    "text": "these steps: ●",
+    "metadata": {
+      "section": "Follow"
+    }
+  },
+  {
+    "text": "a new",
+    "metadata": {
+      "section": "Create"
+    }
+  },
+  {
+    "text": "ﬁle for this task and call it manipulation.py . ●",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "the user to enter a sentence using theinput() function.",
+    "metadata": {
+      "section": "Ask"
+    }
+  },
+  {
+    "text": "the user’s response in a variable calledstr_manip . ●",
+    "metadata": {
+      "section": "Save"
+    }
+  },
+  {
+    "text": "the string m ethods in here to help you solve the problem below: ●",
+    "metadata": {
+      "section": "Explore"
+    }
+  },
+  {
+    "text": "this string value, w rite the code to do the follow ing: ○",
+    "metadata": {
+      "section": "U sing"
+    }
+  },
+  {
+    "text": "and display the length ofstr_manip . ○",
+    "metadata": {
+      "section": "Calculate"
+    }
+  },
+  {
+    "text": "the last letter instr_manip sentence.",
+    "metadata": {
+      "section": "Find"
+    }
+  },
+  {
+    "text": "every occurrence of this letter instr_manip w ith ‘@ ’. ■ e.g. ifstr_manip = “This is a bunch of w ords”, the output w ould be: “Thi@ i@ a bunch of w ord@ ” ○",
+    "metadata": {
+      "section": "Replace"
+    }
+  },
+  {
+    "text": "the last three characters instr_manip backw ards. ■ e.g. ifstr_manip = “This is a bunch of w ords”, the output w ould be: “sdr”. ○",
+    "metadata": {
+      "section": "Print"
+    }
+  },
+  {
+    "text": "a ﬁve-letter w ord that is m ade up of the ﬁrst three characters and the last tw o characters instr_manip . ■ e.g. ifstr_manip = “",
+    "metadata": {
+      "section": "Create"
+    }
+  },
+  {
+    "text": "s is a bunch of w or ds ”, the output w ould be: “Thids”.",
+    "metadata": {
+      "section": "Thi"
+    }
+  },
+  {
+    "text": "sure to place ﬁles for subm ission inside your task folder and click \"Request review\" on your dashboard. Auto-graded task 2",
+    "metadata": {
+      "section": "B e"
+    }
+  },
+  {
+    "text": "these steps: ●",
+    "metadata": {
+      "section": "Follow"
+    }
+  },
+  {
+    "text": "a new",
+    "metadata": {
+      "section": "Create"
+    }
+  },
+  {
+    "text": "ﬁle called numbers.py . ●",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "the user to enter three different integers. ●",
+    "metadata": {
+      "section": "Ask"
+    }
+  },
+  {
+    "text": "print out: ○",
+    "metadata": {
+      "section": "Then"
+    }
+  },
+  {
+    "text": "sum of all the num bers ○ ﬁrst num ber m inus the second num ber ○ third num ber m ultiplied by the ﬁrst num ber ○ sum of all three num bers divided by the third num ber",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "sure to place ﬁles for subm ission inside your task folder and click \"Request review\" on your dashboard. Auto-graded task 3",
+    "metadata": {
+      "section": "B e"
+    }
+  },
+  {
+    "text": "these steps: ●",
+    "metadata": {
+      "section": "Follow"
+    }
+  },
+  {
+    "text": "a new",
+    "metadata": {
+      "section": "Create"
+    }
+  },
+  {
+    "text": "ﬁle in this folder called award.py . ●",
+    "metadata": {
+      "section": "Python"
+    }
+  },
+  {
+    "text": "a program that determ ines the aw ard a person com peting in a triathlon w ill receive. ●",
+    "metadata": {
+      "section": "D esign"
+    }
+  },
+  {
+    "text": "program should read in user input for the tim es (in m inutes) for all three events of a triathlon, nam ely sw im m ing, cycling, and running, and then calculate and display the total tim e taken to com plete the triathlon. ●",
+    "metadata": {
+      "section": "Your"
+    }
+  },
+  {
+    "text": "aw ard a participant receives is based on the total time taken to com plete the triathlon. qualifying tim e for aw ards is any com pletion tim e betw een 0-100 m inutes.",
+    "metadata": {
+      "section": "The"
+    }
+  },
+  {
+    "text": "the award that the participant w ill receive based on the follow ing criteria:",
+    "metadata": {
+      "section": "Display"
+    }
+  },
+  {
+    "text": "criteria",
+    "metadata": {
+      "section": "Qualifying"
+    }
+  },
+  {
+    "text": "range",
+    "metadata": {
+      "section": "Time"
+    }
+  },
+  {
+    "text": "the qualifying tim e. 0 – 100 m inutes",
+    "metadata": {
+      "section": "W ithin"
+    }
+  },
+  {
+    "text": "colours 5 m inutes off from the qualifying tim e. 101 – 105 m inutes half colours 10 m inutes off from the qualifying tim e. 106 – 110 m inutes scroll",
+    "metadata": {
+      "section": "H onorary"
+    }
+  },
+  {
+    "text": "than 10 m inutes off from the qualifying tim e. 111+ m inutes",
+    "metadata": {
+      "section": "M ore"
+    }
+  },
+  {
+    "text": "aw ard",
+    "metadata": {
+      "section": "N o"
+    }
+  },
+  {
+    "text": "sure to place ﬁles for subm ission inside your task folder and click \"Request review\" on your dashboard.",
+    "metadata": {
+      "section": "B e"
+    }
+  },
+  {
+    "text": "strives to provide internationally excellent course content that helps you achieve your learning outcom es.",
+    "metadata": {
+      "section": "H yperion"
+    }
+  },
+  {
+    "text": "that the content of this task, or this course as a w hole, can be im proved, or think w e’ve done a good job?",
+    "metadata": {
+      "section": "Think"
+    }
+  },
+  {
+    "text": "here to share your thoughts anonym ously.",
+    "metadata": {
+      "section": "Click"
+    }
+  }
+]
