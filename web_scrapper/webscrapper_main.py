@@ -27,6 +27,7 @@ GITHUB_TOKEN = config('GITHUB_TOKEN')
 def get_webdriver(exe_path) -> webdriver.Edge:
     options = Options()
     edge_service = Service(exe_path)
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
     user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
 
@@ -186,22 +187,27 @@ if __name__ == "__main__":
     review_data_list = load_review_data(file_url, driver)
 
     for i, review_data in enumerate(review_data_list):
-        driver = get_webdriver(edge_driver_path)
-
-        if i == 10:
-            break
-            
-
-        if review_data['course_lvl'] == 'DFEDSL1':
-            review_text = get_review(review_data['review_link'], driver)
-
+        if review_data['course_lvl'] == 'DFECSL1':
             git_url = f'https://api.github.com/repos/hyperiondev-bootcamps/{review_data["student_id"]}/contents/{review_data["task_name"]}'
 
-            local_base_path = os.path.join(BASE_DIR.parent, 'data', review_data["task_name"], review_data["student_id"])
+            print(git_url)
+            print(f'---\nGetting {review_data["student_id"]} Data from GitHub\n---')
+
+            local_base_path = os.path.join(BASE_DIR.parent, 'data', review_data["student_id"], review_data["task_name"])
 
             download_github_content(git_url, local_base_path, GITHUB_TOKEN)
 
-            local_base_path_review = os.path.join(BASE_DIR.parent, 'data', review_data["task_name"], review_data["student_id"], 'review_text.txt')
+            print('Saving to ...', local_base_path)
+            print('------')
+
+            print('---\nGetting Review Data\n---')
+            print(review_data['task_name'])
+            print('------')
+
+            driver = get_webdriver(edge_driver_path)
+            review_text = get_review(review_data['review_link'], driver)
+
+            local_base_path_review = os.path.join(BASE_DIR.parent, 'data', review_data["student_id"], review_data["task_name"], 'review_text.txt')
 
             with open(local_base_path_review, "w", encoding="utf-8") as file:
                 file.write(review_text)

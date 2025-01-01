@@ -50,7 +50,6 @@ def split_review(processed_review_text):
 
     # Add scores to the result
     result.append({"Scores": scores})
-    print(result)
 
     return result
 
@@ -73,10 +72,8 @@ def insert_review(db_config, code_solution_id, task_title, segmented_review):
         """
         
         scores = dict(segmented_review[-1])
-        print(scores)
 
         scores_dict = dict(scores['Scores'])
-        print(scores_dict)
         
         cursor.execute(
             insert_query,

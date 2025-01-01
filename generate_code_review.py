@@ -2,8 +2,7 @@ import psycopg2
 
 
 def stream_code_file(file_path):
-    # Read the Python script file content
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r', encoding='utf-8', errors='replace') as file:
         parsed_code = file.read()
     return parsed_code
 
@@ -20,10 +19,14 @@ def generate_code_review(db_config):
         cursor = conn.cursor()
 
         file_path = input('Enter path to code file:\n> ')
+        student_name = input('Enter student name:\n> ')
+        task_title = input('Enter task title:\n> ')
+
         code_content = stream_code_file(file_path)
 
+        print('Generating Code Review ')
         # Call the `generate_code_review` function
-        cursor.execute("SELECT generate_code_review(%s);", (code_content,))
+        cursor.execute("SELECT generate_code_review(%s, %s, %s);", (code_content, student_name, task_title,))
         generated_review = cursor.fetchone()[0]  # Fetch the generated review
 
         conn.commit()

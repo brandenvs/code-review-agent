@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 def stream_code_file(file_path):
     # Read the Python script file content
-    with open(os.path.join(BASE_DIR, file_path), 'r') as file:
+    with open(os.path.join(BASE_DIR, file_path), 'r', encoding='utf-8', errors='replace') as file:
         parsed_code = file.read()
     return parsed_code
 
