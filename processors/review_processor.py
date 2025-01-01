@@ -9,13 +9,11 @@ def stream_review(file_path):
     with open(os.path.join(BASE_DIR, file_path), "r", encoding="utf-8") as file:
         review_text = file.read()
 
-    # Clean and process the review text
     lines = review_text.split('\n')
     lines_cleaned = [
         line.strip().replace("=", "") for line in lines if len(line.strip()) > 0
     ]
 
-    # Construct and return processed review str
     review_text = " ".join(lines_cleaned)
     return review_text
 
@@ -48,7 +46,6 @@ def split_review(processed_review_text):
     for i in range(1, len(split_text), 2):
         result.append(split_text[i] + " " + split_text[i + 1].strip())
 
-    # Add scores to the result
     result.append({"Scores": scores})
 
     return result
@@ -56,7 +53,6 @@ def split_review(processed_review_text):
 
 def insert_review(db_config, code_solution_id, task_title, segmented_review):
     try:
-        # Connect to the database
         conn = psycopg2.connect(
             host=db_config['host'],
             database=db_config['database'],
@@ -107,22 +103,17 @@ def insert_review(db_config, code_solution_id, task_title, segmented_review):
 
 
 def split_review_with_metadata(processed_review_text):
-    # Keywords to split the review
     keywords = ["Positive", "Improve", "Overall"]
 
-    # Regex pattern to extract scores
     score_pattern = r'(Efficiency|Completeness|Style|Documentation):\s*([\d.]+)'
 
-    # Extract scores and store as metadata
     metadata = {
         "Scores": {match[0]: float(match[1]) for match in re.findall(score_pattern, processed_review_text)}
     }
 
-    # Regex pattern to split the review by keywords
     split_pattern = r'\b(' + '|'.join(keywords) + r')\b'
     split_text = re.split(split_pattern, processed_review_text)
 
-    # Extract relevant sections
     sections = []
     for i in range(1, len(split_text), 2):
         section_title = split_text[i]
@@ -132,6 +123,4 @@ def split_review_with_metadata(processed_review_text):
             "Content": section_content
         })
 
-    # Add metadata to the result
     return {"Metadata": metadata, "Sections": sections}
-

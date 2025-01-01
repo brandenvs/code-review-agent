@@ -5,11 +5,13 @@ from processors.review_processor import (
     split_review, 
     insert_review
 )
+
 import argparse
 from pathlib import Path
 import os
 
 import psycopg2
+
 
 BASE_DIR = Path(__file__).resolve().parent
 

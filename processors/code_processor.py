@@ -5,7 +5,6 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 def stream_code_file(file_path):
-    # Read the Python script file content
     with open(os.path.join(BASE_DIR, file_path), 'r', encoding='utf-8', errors='replace') as file:
         parsed_code = file.read()
     return parsed_code
@@ -13,7 +12,6 @@ def stream_code_file(file_path):
 
 def insert_code(db_config, task_instructions_id, task_title, code):
     try:
-        # Connect to the database
         conn = psycopg2.connect(
             host=db_config['host'],
             database=db_config['database'],

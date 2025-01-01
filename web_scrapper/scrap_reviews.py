@@ -1,11 +1,24 @@
+import os
+import time
+
 from selenium import webdriver
 
 from selenium.webdriver.common.by import By
-import os
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
 from selenium.webdriver.common.keys import Keys
-import time
+
+from pathlib import Path
+from decouple import config
+
+BASE_DIR = Path(__file__).resolve().parent
+
+ENV_PATH = os.path.join(BASE_DIR, '.env')
+
+config._find_file(ENV_PATH)
+COGRAMMER_PWD = config('COGRAMMER_PWD')
+
 
 def match_task(task_name):
     match task_name:
@@ -40,10 +53,10 @@ def match_task(task_name):
         case _:
             return 'Task not found'
 
+
 def load_review_data(url, driver: webdriver.Edge) -> list:
     driver.get(url)
     
-    # Wait for the page to load and the table rows to be available
     WebDriverWait(driver, 10).until(
         EC.presence_of_all_elements_located((By.XPATH, "//tr"))
     )
@@ -89,24 +102,21 @@ def load_review_data(url, driver: webdriver.Edge) -> list:
 
 
 def get_review(url: str, driver: webdriver.Edge):
-    # Open the URL
     driver.get(url)
     
-    # Enter username
     input_username = driver.find_element(By.NAME, 'username')
     input_username.send_keys("brandenvs@hyperiondev.com")
     time.sleep(2)
 
-    # Enter password
     input_password = driver.find_element(By.NAME, 'password')
-    input_password.send_keys("fTpX5U&Y7l&0%*3c")
+    input_password.send_keys(COGRAMMER_PWD)
     input_password.send_keys(Keys.RETURN) 
     time.sleep(3)
 
     link = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, 'a[href*="format"]'))
     )
-    review_text_link = link.get_attribute('href')  # Perform the click action
+    review_text_link = link.get_attribute('href')
 
     driver.get(review_text_link)
 
