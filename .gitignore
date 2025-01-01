@@ -9,6 +9,8 @@ data/
 .vscode/
 *.code-workspace
 
+web_scrapper/index.html
+
 # C extensions
 *.so
 
