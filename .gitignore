@@ -10,6 +10,7 @@ data/
 *.code-workspace
 
 web_scrapper/index.html
+index.html
 
 # C extensions
 *.so

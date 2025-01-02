@@ -8,6 +8,7 @@ def clean_text(text: str) -> str:
     text = re.sub(r'\s+([.,!?])', r'\1', text)
     return text.strip()
 
+
 def identify_section(text: str) -> str:
     known_headers = [
         "Instructions",
@@ -36,6 +37,7 @@ def identify_section(text: str) -> str:
             return match.group(1).strip()
     
     return "Content"
+
 
 def extract_pdf_content(pdf_path: str) -> List[Dict[str, str]]:
     structured_content = []
@@ -81,6 +83,7 @@ def extract_pdf_content(pdf_path: str) -> List[Dict[str, str]]:
                 current_content = []
     
     return structured_content
+
 
 def save_structured_content(structured_content: List[Dict[str, str]], output_path: str):
     with open(output_path, 'w', encoding='utf-8') as file:
