@@ -13,6 +13,8 @@ import pathlib
 
 import psycopg2
 
+import statistics
+
 import spacy
 from spacy.tokens import Span
 
@@ -50,7 +52,7 @@ def list_folders(directory, recursive=False, indent=""):
     return dirs
 
 
-def find_files(directory, extensions, recursive=False):
+def find_files(directory, extensions, recursive=False) -> list[str]:
     found_files = []
 
     try:
@@ -65,43 +67,6 @@ def find_files(directory, extensions, recursive=False):
     except Exception as e:
         print(f"An error occurred while searching the directory: {e}")
     return found_files
-
-
-def insert_instructions(db_config, task_title, task_instructions):
-    try:
-        # Connect to the database
-        conn = psycopg2.connect(
-            host=db_config['host'],
-            database=db_config['database'],
-            user=db_config['user'],
-            password=db_config['password']
-        )
-        cursor = conn.cursor()
-
-        insert_query = """
-        INSERT INTO task_instructions (title, compulsory_task_1, compulsory_task_2)
-        VALUES (%s, %s, NULL)
-        RETURNING id;
-        """
-
-
-        cursor.execute(insert_query, (task_title, task_instructions))
-        conn.commit()
-
-        inserted_id = cursor.fetchone()[0]
-        
-
-        print(f"Task instructions for '{task_title}' successfully inserted into table!.")
-        return inserted_id
-
-    except psycopg2.Error as e:
-        print(f"Database error: {e}")
-        return None
-
-    finally:
-        if conn:
-            cursor.close()
-            conn.close()
 
 
 def validate_task_pdf(pdf_path):
@@ -141,6 +106,25 @@ def validate_task_pdf(pdf_path):
             return False
 
 
+def cr_pipeline(file_path):
+        review_content = stream_review(file_path)
+
+        review_title = review_content['title']
+        review_text =  review_content['review_text']
+        review_metadata = review_content['metadata']
+
+        review_analysis = nlp(review_text)
+
+        review_sentiment = [sent._.sentiment for sent in review_analysis.sents]
+
+        # Calculate mean avg
+        review_average_sentiment = sum(review_sentiment) / len(review_sentiment) if review_sentiment else 0
+        
+        review_id = insert_review(review_title, review_text, review_average_sentiment, review_metadata)
+
+        return review_id
+
+
 if __name__ == "__main__":
     dirs = list_folders('data')
 
@@ -178,6 +162,15 @@ if __name__ == "__main__":
             solution_file_name = None
 
             for file_path in task_files:
+                file_name = get_file_name(file_path)
+
+                if file_name == 'review_text.txt':
+                    cr_pipeline(file_path)
+    
+    print('All Done!')
+
+
+'''
                 if file_path.endswith('.pdf'):
                     # Uncomment and implement the logic as needed
                     # is_valid = validate_task_pdf(file_path)
@@ -197,16 +190,30 @@ if __name__ == "__main__":
                     file_name = get_file_name(file_path)
                     
                     if file_name == 'review_text.txt':
-                        original_review, processed_review_lines = stream_review(file_path)
-                        processed_review = "\n".join(processed_review_lines)
+                        review_content = stream_review(file_path)
 
-                        review_analysis = nlp(processed_review)
+                        student = None
+                        task_name = None
+                        course = None
+
+                        student = review_content['review_details'][0]['student']
+                        task_name = review_content['review_details'][0]['task_name']
+                        course = review_content['review_details'][0]['course']
+
+                        review_content =  review_content['review_content']
+                        print(review_content)
+
+                        review_analysis = nlp(review_content)
                         sentiments = [sent._.sentiment for sent in review_analysis.sents]
-                        average_sentiment = sum(sentiments) / len(sentiments) if sentiments else 0
+                        average_sentiment = sum(sentiments) / len(sentiments) \
+                            if sentiments else 0
+                        
+                        print(average_sentiment)
 
-                        if solution_file_content and solution_file_name:
-                            review_id = insert_review(f'{average_sentiment:.3f}', processed_review)
-                            solution_id = insert_solution(review_id, solution_file_name, solution_file_content)
+                        # if solution_file_content and solution_file_name:
+                        #     review_id = insert_review(f'{average_sentiment:.3f}', processed_review)
+                        #     solution_id = insert_solution(review_id, solution_file_name, solution_file_content)
+'''
 
     # for student_dir in dirs:
     #     search_dir = f'data/{student_dir}'
