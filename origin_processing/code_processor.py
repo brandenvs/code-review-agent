@@ -11,7 +11,7 @@ def stream_code_file(file_path):
     return parsed_code
 
 
-def insert_code(db_config, task_instructions_id, file_name, task_title, content):
+def insert_solution(db_config, review_id, file_name, file_content):
     try:
         conn = psycopg2.connect(
             host=db_config['host'],
@@ -22,18 +22,17 @@ def insert_code(db_config, task_instructions_id, file_name, task_title, content)
         cursor = conn.cursor()
 
         insert_query = """
-        INSERT INTO code_solutions (task_instructions_id, file_name, title, content)
-        VALUES (%s, %s, %s, %s)
+        INSERT INTO code_solutions (review_id, file_name, file_content)
+        VALUES (%s, %s, %s)
         RETURNING id;
         """
 
-        cursor.execute(insert_query, (task_instructions_id, file_name, task_title, content))
+        cursor.execute(insert_query, (review_id, file_name, file_content))
 
         conn.commit()
 
         inserted_id = cursor.fetchone()[0]
 
-        print(f"Code solution for '{task_title}' successfully inserted into table!.")
         return inserted_id
 
     except psycopg2.Error as e:

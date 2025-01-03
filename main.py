@@ -1,11 +1,10 @@
 from origin_processing.task_processor import extract_pdf_content, save_structured_content
-from origin_processing.code_processor import stream_code_file, insert_code
-
+from origin_processing.code_processor import stream_code_file
 
 from origin_processing.review_processor import (
     stream_review, 
 )
-from db_processing.code_reviews import insert_review
+from db_processing.db_inserts import insert_review, insert_solution
 
 import argparse
 from pathlib import Path
@@ -150,9 +149,6 @@ if __name__ == "__main__":
     parser.add_argument("-r", "--recursive", action="store_true", help="Search recursively through subdirectories.")
     args = parser.parse_args()
 
-    task_pdfs = []
-    reviews = []
-
     db_config = {
         'host': 'localhost',
         'database': 'postgres',
@@ -161,11 +157,6 @@ if __name__ == "__main__":
     }
 
     get_file_name = lambda x: pathlib.Path(x).name
-
-    task_title = None
-    task_instructions = None
-    code = None
-    segmented_review = None
 
     # spaCy setup
     nlp = spacy.load("en_core_web_md")
@@ -178,41 +169,88 @@ if __name__ == "__main__":
     for student_dir in dirs:
         search_dir = f'data/{student_dir}'
         task_dirs = list_folders(search_dir)
-        tasks = [task for task in task_dirs]
-
-        for task in tasks:
-            search_dir = f'data\\{student_dir}\\{task}'
-            task_files = find_files(search_dir, extensions)
+        
+        for task in task_dirs:
+            task_dir = f'data/{student_dir}/{task}'
+            task_files = find_files(task_dir, extensions)
+            
+            file_content = None
+            solution_file_name = None
 
             for file_path in task_files:
                 if file_path.endswith('.pdf'):
+                    # Uncomment and implement the logic as needed
+                    # is_valid = validate_task_pdf(file_path)
+                    # if is_valid:
+                    #     structured_content = extract_pdf_content(file_path)
+                    #     task_title = structured_content[0]['content']
+                    #     for obj in structured_content:
+                    #         if obj['section'] == 'Instructions':
+                    #             task_instructions = obj['content']
                     pass
-                    is_valid = validate_task_pdf(file_path)
-
-                    if is_valid:
-                        structured_content = extract_pdf_content(file_path)
-
-                        task_title = structured_content[0]['content']
-
-                        for obj in structured_content:
-                            if obj['section'] == 'Instructions':
-                                task_instructions = obj['content']
 
                 elif file_path.endswith('.py'):
-                    pass
-                    file_name = get_file_name(file_path)
-                    code = stream_code_file(file_path)
-                
+                    solution_file_name = get_file_name(file_path)
+                    solution_file_content = stream_code_file(file_path)
+
                 elif file_path.endswith('.txt'):
                     file_name = get_file_name(file_path)
+                    
                     if file_name == 'review_text.txt':
-                        original__review, process_review = stream_review(file_path)
-                        processed_review = "\n".join(process_review)
+                        original_review, processed_review_lines = stream_review(file_path)
+                        processed_review = "\n".join(processed_review_lines)
 
                         review_analysis = nlp(processed_review)
-
                         sentiments = [sent._.sentiment for sent in review_analysis.sents]
-
                         average_sentiment = sum(sentiments) / len(sentiments) if sentiments else 0
 
-                        review_id = insert_review(f'{average_sentiment:.3f}', processed_review)
+                        if solution_file_content and solution_file_name:
+                            review_id = insert_review(f'{average_sentiment:.3f}', processed_review)
+                            solution_id = insert_solution(review_id, solution_file_name, solution_file_content)
+
+    # for student_dir in dirs:
+    #     search_dir = f'data/{student_dir}'
+    #     task_dirs = list_folders(search_dir)
+    #     tasks = [task for task in task_dirs]
+
+    #     for task in tasks:
+    #         search_dir = f'data\\{student_dir}\\{task}'
+    #         task_files = find_files(search_dir, extensions)
+
+    #         for file_path in task_files:
+    #             if file_path.endswith('.pdf'):
+    #                 pass
+    #                 # is_valid = validate_task_pdf(file_path)
+
+    #                 # if is_valid:
+    #                 #     structured_content = extract_pdf_content(file_path)
+
+    #                 #     task_title = structured_content[0]['content']
+
+    #                 #     for obj in structured_content:
+    #                 #         if obj['section'] == 'Instructions':
+    #                 #             task_instructions = obj['content']
+
+    #             elif file_path.endswith('.py'):
+    #                 solution_file_name = get_file_name(file_path)
+    #                 file_content = stream_code_file(file_path)
+                
+    #             elif file_path.endswith('.txt'):
+    #                 file_name = get_file_name(file_path)
+    #                 if file_name == 'review_text.txt':
+    #                     original__review, process_review = stream_review(file_path)
+    #                     processed_review = "\n".join(process_review)
+
+    #                     review_analysis = nlp(processed_review)
+
+    #                     sentiments = [sent._.sentiment for sent in review_analysis.sents]
+
+    #                     average_sentiment = sum(sentiments) / len(sentiments) if sentiments else 0
+
+    #         review_id = insert_review(f'{average_sentiment:.3f}', processed_review)
+
+    #         if file_content:
+    #             solution_id = insert_solution(review_id, solution_file_name)
+
+
+
