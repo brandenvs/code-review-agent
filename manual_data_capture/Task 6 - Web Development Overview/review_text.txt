@@ -1,0 +1,41 @@
+==========  2025/01/06  ==========
+
+Completeness: 4/4
+
+Efficiency: 4/4
+
+Style: 4/4
+
+Documentation: 4/4
+
+Hey, Lisa.
+
+Great work completing your theory-based task on concepts associated with Web Development.
+
+🤩 Positive aspects of this submission include:
+
+✅ Provide a comparison of Web 1.0  vs Web 2.0 correctly by mentioning static web pages as the key component of Web 1.0 while Web 2.0 features two-way communication, dynamic web pages, and user interaction. 
+
+✅ Accurately distinguished the back-end from the front-end by mentioning the front-end (presentation layer) as user-facing and interactive and the back-end (data access layer) as responsible for data storage, retrieval, and page rendering.
+
+✅ Correctly outlined the following processes associated to URL requests:
+- Typing a URL into the address bar.
+- Browser connecting to the specified web server.
+- Server receiving the request and returning the page or an error message.
+- Browser loading the received page and closing the connection.
+
+Lisa, I would love for you to consider the following expansions to your answers:
+
+❓Question: What is Web 3.0, and how is it different from Web 1.0 and Web 2.0?
+
+➡️ Consider adding more relevant features of Web 3.0, such as artificial intelligence, blockchain, and the Internet of Things (IoT).
+
+❓Question: What are the functional differences between the front end of a web application and its back end?
+
+➡️ Clarifying how front ends are built could benefit your understanding and the provided answers. For example, frontends are primarily built using client-side languages like HTML, CSS, and JavaScript. Vice versa, back-ends are typically built using server-side languages like Python, Rust, C#, and PHP and integrate well with databases like MySQL and MongoDB.
+
+Overall, your answers to the given questions are on point, and I thoroughly enjoyed reading through your submission. Your submission demonstrates a solid understanding of foundational web development concepts. 
+
+Well done, Lisa, keep up the great work🦾!
+
+===============================

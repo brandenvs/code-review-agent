@@ -1,0 +1,832 @@
+﻿A Toolbox for Ethical Hacking
+Task
+
+
+
+
+
+
+
+
+
+
+  
+
+________________
+Introduction
+In this task, you will learn about the tools needed for each practical stage of ethical hacking. These stages include reconnaissance, scanning and enumeration, exploitation, and post-exploitation. You will use these tools when you perform a full penetration test to produce a report and debrief the client based on a simulation.
+Ethical hacking is a simulation of malicious steps an attacker would follow to discover confidential information and vulnerabilities. While unethical hackers would use these to exploit a security system to gain unauthorised access to a network, ethical hackers aim to identify vulnerabilities and ensure these are fixed before they can be exploited. Ethical hacking encompasses penetration testing and other aspects of cyber security.
+Here is an overview of the tools introduced in this task:
+* Reconnaissance tools are for gathering information about the target.
+* Scanning and enumeration tools are for scanning the security system to find any confidential information or vulnerabilities to exploit.
+* Exploitation tools are used to gain unauthorised access to a network.
+* Post-exploitation tools are a combination of the above tools, as with each point of access you will need to perform reconnaissance, scanning and enumeration, and privilege escalation. 
+Reconnaissance tools
+Reconnaissance is the first stage of ethical hacking that entails the collection of public or private information about the target. Reconnaissance tools enable a better understanding of the target, mapping potential usernames, passwords, directories, etc.
+Imagine you are starting a new position as a cyber security specialist. Your supervisor, Pedro, is presenting you with the toolset you will have at your disposal for performing your day-to-day activities, which will range from threat hunting to penetration testing to forensics. Before we cover the different reconnaissance tools, we need to understand the concept of the Domain Name System first.
+________________
+Domain Name System
+The Domain Name System (DNS) is an essential element of the internet that converts domain names that are readable by humans, such as www.example.com, into IP addresses that are used by computers to identify one another on a network, such as 192.0.0.1. By allowing users to access websites and other online resources using memorable names rather than numeric addresses, it serves as the Internet's equivalent of a phone book.
+Key components of the DNS
+* DNS resolver: A server that receives DNS queries and handles the process of returning the IP address.
+* Root servers: The top-level DNS servers that direct queries to appropriate top-level domain servers.
+* Top-level domain (TLD) servers: TLD servers are an essential part of the DNS hierarchy. They are responsible for directing DNS queries to the appropriate authoritative name servers for specific domain extensions, such as .com, .org, .net, etc.
+* Authoritative DNS servers: Servers that contain the actual DNS records for specific domains.
+How the DNS works
+1. Domain name query: A DNS query is started when you type a domain name into your web browser.
+2. Recursive resolver: A DNS resolver, usually offered by your Internet service provider (ISP) or a third-party service (such as Google DNS), receives the query.
+3. Root server: If the resolver does not already have the IP address cached, it queries a root DNS server to find the relevant TLD server (such as .com, .org, etc.).
+4. TLD server: Depending on the domain extension, the root server points the resolver to a TLD server (such as .com or .net).
+5. Authoritative DNS server: After that, the TLD server points the resolver in the direction of the domain-specific authoritative DNS server.
+6. IP address return: In response, the domain name's IP address is returned by the authoritative DNS server.
+7. Page load: The resolver comes back with the IP address to the user's browser, which then requests the web page from the server at that IP address.
+Types of protocols
+A protocol is a collection of guidelines and conventions that specify how information is sent and received via a network. Regardless of its underlying architecture or implementation, protocols guarantee that various devices and systems can communicate with one other in an efficient manner. Data format, error management, authentication, and synchronisation are some of the elements they cover. 
+In networking, these protocols often handle data transmission in the form of packets—small units of data sent across a network. Each packet contains control information, such as source and destination addresses, error-checking codes, and sequencing details, alongside the payload, which is the actual data being transmitted. This packet-based structure helps ensure reliable and accurate communication between devices
+1. Communication protocols: Define how data is exchanged over a network.
+   * Hypertext Transfer Protocol (HTTP) and Hypertext Transfer Protocol Secure (HTTPS): Used for web communication.
+   * File Transfer Protocol (FTP): Used for transferring files.
+   * Simple Mail Transfer Protocol (SMTP): Used for email transmission.
+2. Network protocols: Define the operations of the internet and other networks.
+   * Internet Protocol (IP): This routes packets across network boundaries.
+   * Transmission Control Protocol (TCP) and User Datagram Protocol (UDP): Used for data transmission.
+3. Security protocols: Ensure data integrity, confidentiality, and authentication.
+   * Secure Sockets Layer/Transport Layer Security (SSL/TLS): Used for encrypted communication.
+   * Internet Protocol Security (IPSec): Used for secure IP communications.
+4. Routing protocols: Determine the best paths for data transfer across networks.
+   * Open Shortest Path First (OSPF): Used for IP networks.
+   * Border Gateway Protocol (BGP): Used for inter-autonomous system routing.
+________________
+Common DNS record types
+   * A record: Maps a domain name to an IPv4 address.
+   * AAAA record: Maps a domain name to an IPv6 address.
+   * CNAME record: Creates an alias for one domain name to point to another domain name.
+   * MX record: Mail exchange record, which specifies mail servers for a domain.
+   * TXT record: Holds text information for various purposes, often for verification.
+In the DNS, protocols are essential because they specify the format and transmission method for queries and responses via networks. TCP is used by DNS to deliver larger, more dependable replies, while UDP is used for rapid, erratic requests. It's important to understand protocols as the accuracy, security, and efficiency of domain name resolution, which is the foundation of the Internet's operation.
+SpiderFoot
+The first tool Pedro shows you, SpiderFoot, is one that you will use for reconnaissance purposes when preparing for attacks during penetration testing. You will also use it for forensic work in post-incident response.
+SpiderFoot is an open-source intelligence (OSINT) tool. It is free and can be used for reconnaissance and information gathering in cyber security, as well as responding to cyber attacks. It automates the process of collecting data in the public domain. This information includes IP addresses, domains, email addresses, and network information, amongst others, from a wide variety of sources. 
+Follow these instructions to install SpiderFoot:
+   1. Open up a terminal in your Kali Linux virtual machine.
+   2. Run the following commands with sudo one at a time:
+wget https://github.com/smicallef/spiderfoot/archive/v4.0.tar.gz
+	   * wget: This command-line utility is used to download files from the internet.
+   * Use this URL that points to a tarball (a compressed archive file) containing the source code for SpiderFoot version 4.0 hosted on GitHub.
+tar zxvf v4.0.tar.gz
+	   * tar: This command is used to manipulate tar archives, which are often compressed with gzip (.tar.gz).
+   * z: Tells tar to decompress the archive using gzip.
+   * x: Tells tar to extract the files from the archive.
+   * v: Designates verbose mode, which makes tar print the names of the files being extracted to the terminal.
+   * f: Specifies that the next argument is the name of the tarball to operate on (v4.0.tar.gz).
+   3. If downloading and extracting a specific version of a software package like SpiderFoot doesn't work or results in errors, you can try the following steps:
+   * Check if there is a newer version available that might have resolved the issue. Visit the SpiderFoot GitHub releases page to find the latest version.
+   * Replace v4.0 in the wget command with the latest version number. For example, if the latest version is v4.1, the command would be: 
+wget https://github.com/smicallef/spiderfoot/archive/v4.1.tar.gz
+	   4. After the above steps, navigate to the SpiderFoot directory:
+cd spiderfoot-4.0
+	   5. Install the required Python packages:
+pip3 install -r requirements.txt
+	   6. If you encounter issues related to the PyYAML module version specified in requirements.txt:
+   * Ensure that your Python version is compatible with the version of PyYAML specified in requirements.txt with python3 --version.
+   * It's good practice to ensure that pip and setup tools are up to date before installing packages by using the following: pip3 install --upgrade pip setuptools.
+   * Open requirements.txt with sudo nano requirements.txt and locate the line specifying PyYAML. It might look something like this at the end of the file:
+  
+
+   * Check if the version specified (in this case, 5.4.1) is causing issues. You might need to adjust this version or let pip resolve the version automatically.
+   * If the specified version is causing problems, you can try installing the latest version that is compatible with your Python environment: pip3 install PyYAML.
+   7. After the previous steps, run the SpiderFoot application:
+python3 ./sf.py -l 127.0.0.1:5001
+	This command is used to start the SpiderFoot application, specifying that it should listen on the IP address 127.0.0.1 (localhost) and port 5001.
+   * python3: This invokes the Python 3 interpreter to run a Python script.
+   * ./sf.py: This specifies the Python script to run, in this case, sf.py, which is located in the current directory (./).
+   * -l 127.0.0.1:5001: This is an argument passed to the script. The -l flag typically stands for “listen” and is used to specify the IP address and port on which the application should listen for incoming connections.
+   8. After running the last command, your terminal should look as follows:
+  
+
+   9. Open your browser and load the following page: http://127.0.0.1:5001/
+   10. You should be presented with the following:
+  
+
+   11. Select “New Scan” and give your scan a name (e.g., “Test scan”) and a target (e.g., “apple.com”). Then click on “Run Scan Now”.
+  
+
+   12. View the scan results by going to each section tab to analyse the data. Note that these results may be different for you.
+  
+
+As a cyber security professional, you will require reconnaissance information pertaining to an organisation’s Internet presence, or “digital footprint”. In the bar chart that SpiderFoot generates, you will see all elements in the public domain that SpiderFoot has collected for the specified domain (in this case, “apple.com”).
+In this example, we see, as highlighted by the red rectangle, that there is a high number of occurrences of references to the “darknet”. The darknet refers to parts of the Internet that are not indexed by traditional search engines and are often associated with illicit activities, underground forums, and illegal marketplaces. A high graph value for this parameter suggests that there are significant keywords associated with, or activities taking place in, the darknet. This could indicate potential security risks, data breaches, leaked credentials, discussions about the target organisation (in this case, Apple), or mentions in forums frequented by a threat actor.
+Let’s briefly investigate each one of these to determine their meaning and how they could be exploited.
+  
+
+Let’s get an idea of what each column represents:
+   1. Type: As mentioned above, SpiderFoot collects all information in the public domain. The first column labels each information element, for example, IP addresses and DNS name server records. This column lets you quickly identify which type of data is being displayed.
+   2. Unique Data Elements: A unique data element refers to distinct information collected. For example, if multiple instances of the same email address are found, this email address will count as one data element. In this manner, you can obtain a better idea of the diversity of information collected, and determine which data types have yielded the most unique information.
+   3. Total Data Elements: This column displays the total number of data elements gathered for each type, including duplicates. A high number of total data elements, especially when significantly higher than the number of unique elements, may highlight areas where information is being repeatedly found, possibly reinforcing its validity or importance.
+   4. Last Data Element: This column displays the timestamp of the most recently identified data element for each data type listed. This provides you with a quick glimpse into the information SpiderFoot is currently uncovering.
+   13. To stop running the scan, click on “Scans”, select your “Test scan”, and click the square stop button on the far right at the end of the row.
+  
+
+Email harvesting
+Ransomware attacks are mostly initiated by attempting to obtain information, or “phishing”, using email as the medium of attack. As such, an attacker needs a method to find and analyse email addresses in large quantities to start their campaign. Pedro shows you one such tool called EmailHarvester. As a penetration tester for initial reconnaissance, you will use this tool to launch phishing and spam campaigns just as cybercriminals do.
+An email harvester is a software tool or script designed to extract email addresses from various online sources, ranging from websites and online forums to social media platforms. These tools automate the process of collecting email addresses by scanning web pages and extracting email addresses found in the text or linked within the pages. 
+  
+
+	Extra resource
+	Explore the source code and documentation for EmailHarvester if you would like to learn more about it.
+  
+
+Follow these instructions to install and use EmailHarvester:
+   1. Open up a terminal in your Kali Linux virtual machine.
+   2. Run the following command:
+sudo apt install emailharvester -y        
+	   3. Access help using the following command:
+emailharvester -h
+	You can see a screenshot of the help output below:
+  
+
+   4. Now, run the following command to scan for domain email addresses on the “apple.com” domain:
+emailharvester -d apple.com
+	The -d parameter sets the domain to search for. You could add the optional -e parameter to set the search engine plugin. See the results below:
+  
+
+theHarvester
+Kali Linux has a prebuilt OSINT tool called theHarvester. This tool gathers employee names, last names, email addresses, usernames, and open ports from various public-facing sources.
+  
+
+	Extra resource
+	Read more about theHarvester and explore its documentation.
+  
+
+To use theHarvester, start by going to your Kali Linux terminal and typing the following command:
+theHarvester --help
+	The expected output is shown below:
+  
+
+  
+
+You are going to attempt to discover hosts related to the “apple.com” domain. Using the following command, you will gain reconnaissance information about Apple’s domain. DNSDumpster is a free online tool for gathering DNS information about domains that can be used in conjunction with theHarvester. Type the following:
+theHarvester -d apple.com -b dnsdumpster 
+	This will produce something like the output pictured below:
+  
+
+As previously mentioned, as a cyber security professional, you will require reconnaissance information pertaining to an organisation’s Internet presence. For example, how large is their Internet presence? What assets are exposed via DNS?
+By mapping out the domain's DNS-related assets, security professionals can better understand the organisation’s vulnerability points (also known as the “attack surface”) and prioritise security measures accordingly.
+In the next section, we will use a tool called Nmap to plot out a network topology. Here, you can use an email harvester to do something similar within the context of the DNS. Items of interest include IP addresses and mail server information, the latter of which is represented via DNS MX records.
+By mapping out the domain's DNS-related assets, you (and cybercriminals!) can get a clearer picture of what items of an organisation’s domain can be exploited, such as web servers, mail servers, etc.
+  
+
+	Extra resource
+	The OSINT Framework is another great alternative tool for gathering information. Learn more by visiting the OSINT Framework website.
+  
+
+Scanning and enumeration tools
+Scanning and enumeration tools are used to locate vulnerabilities within a security system. Running scans and enumerating the data received provides a clearer picture of what the network structure looks like and where the strong and weak areas lie.
+Pedro will now show you the network tools you can use to map out the organisation's network topology and the ports its applications run on. You will also see how vulnerabilities in these services are uncovered, and how you can analyse corporate web applications and their security posture. Just keep in mind that cybercriminals have the same tools at their disposal to obtain the same information from your organisation's Internet presence! Before we begin covering scanning and enumeration tools, we need to understand the OSI model first.
+OSI model
+The Open Systems Interconnection (OSI) model is a conceptual framework used to understand and implement standard protocols in computer networking. It divides the network communication process into seven distinct layers, each with specific functions and responsibilities. The OSI model provides a universal set of standards and rules for hardware and software manufacturers, ensuring different systems can communicate with each other. Here’s a detailed look at each layer:
+  
+
+A diagram of the OSI model (Raza, 2018)
+   1. Physical layer:
+The OSI model's lowest layer deals with data communication, which is the actual transfer of information between networking devices and infrastructure via electrical, optical, or electromagnetic signals. The transmission of unstructured raw data streams across a physical media is handled by the physical layer. It describes a number of things, such as:
+   * Transmission media: Cables (coaxial, twisted pair, fibre optic) and wireless signals.
+   * Hardware components: Network interface cards (NICs), repeaters, hubs, and modems.
+   * Data representation: Bits (0’s and 1’s).
+   2. Data link layer:
+The second layer of the OSI model controls the connections between physically connected devices, such as switches, and deals with data transmission between network nodes. After being synchronised, the raw data from the physical layer is bundled into data frames together with the protocols required to transmit information between the right nodes. Two sublayers comprise the data link layer:
+   * Logical link control (LLC): Handles multiplexing, flow control, and error checking.
+   * Medium access control (MAC): Controls how devices in a network gain access to a medium and permission to transmit data.
+Key concepts for the data link layer:
+   * Frames: Data packets at this layer.
+   * MAC addresses: Unique hardware addresses for network devices.
+   * Error detection/correction: CRC (cyclic redundancy check) and parity bits.
+   * Flow control: Ensuring that the sender does not overwhelm the receiver.
+   3. Network layer:
+The OSI model's third layer is responsible for organising and transferring data between various networks.
+The network layer is in charge of directing data via the optimal physical path depending on a number of variables, such as network properties, the best path that is available, traffic restrictions, packet congestion, and service priority. To identify between the source and destination networks, the network layer applies logical addressing for data packets.
+Error handling, congestion restrictions, and encapsulation and fragmentation are further functions. Data that is consumable at a higher application level is reconstructed from the separated outgoing and incoming packets. Routes, bridge routers, three-layer switches, and protocols like Internet Protocol version 4 and version 6 are examples of network layer hardware.
+Key concepts for the network layer:
+   * Packets: Data packets at this layer.
+   * IP addresses: Logical addresses used to identify devices on a network.
+   * Routing: Determining the best path to send data from source to destination.
+   * Subnets and subnet masks: Dividing networks into smaller parts.
+   4. Transport layer:
+The transport layer controls end-to-end communication between devices and guarantees full data flow. It manages data segmentation, flow control, and error detection and recovery.
+   * Error control, flow control, and congestion control are just a few of the tools that the transport layer offers to monitor data packets, look for errors and duplication, and resend information that is not delivered. To make sure that the packet is transmitted in response to a particular process (via a port address), it makes use of the service-point addressing mechanism.
+   * Data is separated and transported progressively to the destination, where it is rechecked for accuracy and integrity based on the receiving sequence, thanks to packet segmentation and reassembly.
+Key concepts for the transport link layer:
+   * Segments: Data packets at this layer.
+   * Port numbers: Identifying specific processes or services on a device.
+   * Connection-oriented protocols: TCP ensures reliable data transmission.
+   * Connectionless protocols: UDP provides faster but less reliable data transmission.
+   5. Session layer:
+The session layer manages sessions between applications. It establishes, maintains, and terminates connections between communicating devices. In order to organise communication between servers, the session layer controls sessions. Any interactive data exchange between two entities in a network is referred to as a session. Frequently cited instances are HTTPS sessions, which let users visit and explore websites for a predetermined amount of time.
+A variety of tasks are carried out by the session layer, such as recognising full-duplex or half-duplex operations, synchronising data streams, and authenticating and authorising communication between particular apps and servers. 
+Key concepts:
+   * Sessions: Established connections for ongoing communication.
+   * Synchronisation: Managing the dialogue between two devices.
+   * Checkpoints: Resuming data transfer from the last checkpoint in case of interruption.
+   6. Presentation layer:
+Translates data between the application layer and the network format. It handles data encryption, decryption, compression, and translation. This layer formats and encrypts the data we send from our encryption-based communication app before it’s transferred over the network. The data is formatted into text or media content as intended after it’s been decrypted at the receiving end.
+Key concepts:
+   * Data encoding: Converting data into a common format.
+   * Encryption/decryption: Securing data for transmission and converting it back into its original form.
+   * Data compression: Reducing the size of data to save bandwidth.
+   7. Application layer:
+The application layer provides network services directly to end-user applications. It interfaces with the application software and handles high-level protocols and data exchanges. This layer interacts directly with end-users to provide support for email, network data sharing, file transfers, and directory services. 
+Key concepts:
+   * Protocols: Specific rules for communication between applications.
+   * Services: Email, file transfer, and web browsing.
+   * User interfaces: Interaction between the user and the network.
+A useful way of remembering the OSI model’s layer names is to use mnemonics such as: Please Do Not Throw Sausage Pies Away (layers 1–7 respectively).
+Nmap
+Nmap is a tool used to discover network devices and the services running on these devices. It runs at layer 3 of the OSI stack (meaning it uses IP addressing) and analyses ports at layer 4 of the OSI stack to determine which services are being run on which ports (e.g., SQL database, HR payroll application, etc.).
+As a security operations centre (SOC) specialist, you will use Nmap to map out the topology of your network, showing each server's IP address(es). You will then use Nmap to obtain information on the services running on each OSI layer 4 port. 
+As a penetration tester, you will use Nmap for reconnaissance and to detect vulnerabilities such as weak passwords that allow easy access to a system. You will also use this tool in forensic testing during incident response, and for security audits to confirm the effectiveness of any security measures implemented. 
+Nmap is a port scanner that indicates open, filtered, and closed ports in addition to detecting traceroutes, operating system versions, running services, and indicating banners. Before we cover Nmap and various commands, we need to understand ports.
+Ports
+A port is a virtual point where network connections start and end. An IP port is a 16-bit unsigned integer, hence it ranges from 0 to 65 535 (which is 2 raised to the power of 16). Ports are used to distinguish between different types of network traffic and services on a single device. They allow multiple networked applications to run simultaneously on a device by directing the data to the appropriate application or process.
+Ports are identified by their port numbers. Further, the assignment of all 65 535 TCP/UDP ports is maintained by the Internet Assigned Numbers Authority (IANA). These numbers are divided into categories:
+   * Well-known ports (0–1 023): Assigned to widely used protocols and services (e.g., HTTP uses port 80, HTTPS uses port 443, FTP uses port 21).
+   * Registered ports (1 024–49 151): Assigned by the IANA for specific services and applications that are not as universally recognised as those using well-known ports.
+   * Dynamic or private ports (49 152–65 535): Typically used for temporary communication sessions, often dynamically allocated by the operating system.
+A few of the well-known ports include:
+   * Ports 20 and 21 for FTP: Used for transferring files between a client and a server.
+   * Port 22 for Secure Shell Protocol (SSH): SSH is one of many tunnelling protocols that create secure network connections.
+   * Port 25 for SMTP: SMTP is used for email.
+   * Port 53 for DNS: DNS is an essential process for the modern Internet; it matches human-readable domain names to machine-readable IP addresses, enabling users to load websites and applications without memorising a long list of IP addresses.
+   * Port 80 for HTTP: HTTP is the protocol that makes the World Wide Web possible.
+   * Port 110 for the Post Office Protocol (POP): POP is used by local email clients to retrieve mail from servers.
+   * Port 123 for NTP: NTP is used to synchronise time with remote time servers.
+   * Port 443 for HTTPS: HTTPS is the secure and encrypted version of HTTP, which goes to port 443. Network services that use HTTPS for encryption, such as DNS over HTTPS, also connect at this port.
+It is important to know which port belongs to which service when doing a port scan as this will help you when it comes to the exploitation stage. Certain services also belong to certain operating systems, such as port 3 389, which is usually found in Windows.
+Nmap commands
+In order to run Nmap, you will need to know which IP address or subnet you are scanning. In your terminal you can check your IP by running ifconfig in Linux and ipconfig in Windows. Note that the IP address you find will be the one you use, not the one shown in the screenshot below.
+  
+
+If you are using Ubuntu instead of Kali Linux, install the Nmap tool with sudo apt install nmap before using it. Once it’s installed we can begin looking at the basic Nmap commands.
+Key features of Nmap:
+   * Host discovery: Identifies active devices on a network. This is also called a ping scan and it will identify which hosts are active and reachable on a network without scanning ports, in this particular case it will scan the whole subnet. In the screenshot further below, we scanned the whole subnet using /24 and it came up with four hosts. Since we already know which IP belongs to us from the previous step, we will proceed using that IP address for further scans.
+________________
+  
+
+	Take note
+	Subnetting is the process of breaking up a bigger network into more manageable chunks. A /24 subnet means that the network portion of the IP address uses the first 24 bits, while individual devices on the network use the final 8 bits. With the exception of network and broadcast addresses, this configuration supports 256 IP addresses, of which 254 can be used by devices.
+  
+
+      * -sn: This option indicates that we do not want any kind of port scanning, and our only intent is to learn about host devices on the network.
+      * -pn: This option can also be used to block ping requests.
+nmap -sn 192.168.32.129/24
+	  
+
+      * Port scanning: Determines open ports and services running on a host. When we scan our host, it will show only one port open. Port scanning involves sending packets to specific ports on a host and analysing the responses to identify any security vulnerabilities. To perform a port scan, we first need to identify which hosts are active on the network and assign IP addresses to them. This initial step is called host discovery, and it involves conducting a network scan.
+nmap 192.168.32.129
+	  
+
+      * Service version detection: Identifies software versions running on open ports. In this case, Nmap couldn’t identify the service version although the system is running Ubuntu Linux. Note that the port scanning feature does not always give precise answers. Nmap tries to get as close as it can from the ports it can see.
+nmap -sV 192.168.32.129
+	  
+
+If your virtual machine also gives you inconclusive results, you may use scanme.nmap.org as your host, as shown below, to show what the results could look like. In this case, this host is using a Linux machine. You also get to see the service versions for the open ports, such as port 80 running Apache httpd 2.4.7. This is important for the exploitation phase as you will have to research what vulnerabilities this version of Apache has.
+  
+  
+
+      * OS detection: Determines the operating system of a host. In this case, Nmap couldn’t identify the service version although the system is running Ubuntu Linux. Again, note that the port scanning feature does not always give precise answers, and Nmap tries to get as close as it can from the ports it can see.
+nmap -O 192.168.32.129
+	  
+
+Again, if your virtual machine also gives you inconclusive results such as the screenshot above, you may use scanme.nmap.org as your host as shown in the screenshot below. This is to show what the results could look like, and in this case this host has inconclusive results as well, but the previous step has revealed that the host is a Linux machine.
+  
+
+      * Aggressive scan: Enables OS detection, version detection, script scanning, and traceroute. Aggressive scans provide far better information than regular scans. However, an aggressive scan also sends out more probes, and it is more likely to be detected during security audits.
+nmap -A 192.168.32.129
+	      * Scanning specific ports: Used when you know which ports you want to scan for. In this case, both port 80 and 443 are closed. Remember that port 80 is not secure, so if it was open this could be a potential gateway for exploitation.
+nmap -p 80,443 192.168.32.129
+	  
+
+You can also scan for all the ports instead of specifying which ones. In this case, only one port was open.
+nmap -p- 192.168.32.129
+	  
+
+      * Scriptable interaction: Uses Nmap Scripting Engine (NSE) for more advanced detection and exploitation. This will run vulnerability detection scripts against the target. These scripts automate a variety of networking activities, including advanced network diagnostics, service discovery, and vulnerability detection. In this case, our host shows that the script (ssl-ccs-injection) execution has failed and has timed out due to no response from the server.
+nmap --script vuln 192.168.32.129
+	  
+
+We can try again with the scanme.nmap.org host to get a successful script. In the screenshot below our command has returned some results, and the highlighted part shows that this host is vulnerable to some web app vulnerabilities such as cross-site scripting (XSS) and Slowloris DOS attacks, meaning that you can start planning exploitation for this vulnerability.
+nmap --script vuln scanme.nmap.org
+	  
+
+Common Nmap port states
+Nmap classifies ports in six states, which will help you analyse the results from the scan.
+      1. Open: An application is actively accepting TCP connections and UDP associations on this port. This usually signals that the target can be further analysed and exploited.
+      2. Closed: The port is accessible but there is no application listening on it. This could mean ​​the host is up, but no service is running on this port. Closed ports can be useful to conclude that the host exists and is reachable.
+      3. Filtered: Nmap cannot determine whether the port is open because packet filtering prevents the probes from reaching the port. The port could be open or closed, but the presence of a firewall, router, or other network device is blocking the probe. This indicates some level of network security is in place.
+      4. Unfiltered: An unfiltered port is accessible, but Nmap cannot conclusively determine whether it is open or closed. This state is most commonly observed in ACK scans, which check whether a firewall is present by sending packets designed to elicit specific responses. In this case, the lack of a response means the port is neither confirmed as open nor as filtered. An unfiltered state can indicate that a firewall is present but not interfering with the probe in a way that blocks visibility.
+      5. Open|Filtered: Nmap cannot determine whether the port is open or filtered. This indicates that no response was received, and hence, the port is either open or filtered.
+      6. Closed|Filtered: Nmap is unable to determine whether a port is closed or filtered. This state is used for IP ID idle scans where probes are dropped, making it ambiguous whether the port is actually closed or filtered.
+  
+
+	Extra resource
+	Explore the Nmap reference guide to learn more about the features of Nmap.
+  
+
+Nessus
+After mapping the network’s topology and identifying which services run on which ports, Nessus can be used to assess vulnerabilities, such as missing updates and configuration issues. Nessus also supports compliance testing for standards like GDPR, HIPAA, and PoPIA, helping to ensure adherence to these regulations by detecting security gaps.
+      * Health Insurance Portability and Accountability Act (HIPAA): Protects health information, enhances insurance portability, and reduces fraud.
+      * General Data Protection Regulation (GDPR): Safeguards personal data and privacy within the EU, with strict compliance requirements.
+      * Protection of Personal Information Act (POPIA): Governs the processing of personal information in South Africa, balancing privacy with other rights.
+In addition to vulnerability and compliance testing, Nessus can also be used for reconnaissance by cybercriminals to identify and exploit vulnerabilities.
+While Nmap scans network devices at layers 3 (network) and 4 (transport) of the network stack, Nessus operates at layers 6 (presentation) and 7 (application). This allows Nessus to provide detailed and granular information on applications, services, and their configurations. As a vulnerability scanner, Nessus is frequently used in ethical hacking to uncover vulnerabilities within a network.
+At the presentation layer, Nessus evaluates encrypted communications to assess the security of SSL/TLS implementations. It verifies whether SSL/TLS configurations are secure and identifies any use of weak ciphers or protocols. Nessus also analyses various data formats to understand the data being transferred and detect potential vulnerabilities related to data encoding or compression.
+At the application layer, Nessus performs the majority of its operations by directly interacting with network services and applications to identify vulnerabilities. It scans and tests services such as web servers, mail servers, and database servers. For instance, Nessus checks HTTP/S for vulnerabilities like XSS (cross-site scripting) and SQL injections, while for FTP it looks for insecure authentication and anonymous access. For SMTP, Nessus examines mail servers for open relay configurations and weak authentication. Additionally, Nessus assesses SSH for potential vulnerabilities in remote access protocols.
+  
+
+	Take note
+	You will not be able to use a Gmail-hosted email address to sign up for Nessus. You will need to use an email either associated with a company or educational institution, or any personal email that isn’t Gmail.
+  
+
+Let’s set up Nessus and perform a scan.
+      1. Go to Tenable to download Nessus. Ensure that you download it on your Kali Linux virtual machine. 
+      2. Select the most recent version of Nessus, select “Linux – Debian – amd64” as the platform, and then click on “Download”. In this case the recent version is 10.7.5, which could be different in the future.
+  
+
+      3. Click on “I Agree” to accept the Licence Agreement. Once you have accepted, the Nessus file will start downloading automatically.
+      4. After downloading the file, open the terminal and navigate to the “Downloads” directory to verify that the Nessus file has been downloaded:
+cd Downloads
+	Use the ls command to check if the Nessus file is present, confirming that it has been downloaded. You should see the Nessus file listed among the files in the downloads folder.
+      5. Use depackage (dpkg) to locate the file.
+The dpkg command is a low-level package manager for Debian-based systems (such as Ubuntu). It is used to install, remove, and manage Debian packages (.deb files). Since we are trying to install this package, we will use the -i option:
+dpkg -i Nessus-10.7.3-debian10_amd64.deb 
+	Other options include:
+      * sudo dpkg -r package_name: To remove the package but leave configuration files.
+      * sudo dpkg --purge package_name: To completely remove the package along with its configuration files.
+      * dpkg -l: To list the packages installed.
+      * dpkg -s package_name: To check the status of the specified package (whether it is installed, and if so, its version and other details).
+  
+
+
+
+The above screenshot shows the installation of Nessus version 10.4.2 on a Kali Linux system using the dpkg command. By using the dpkg -i command, the installer initiates the installation of the Nessus package, placing the necessary files and dependencies on the system.
+      6. Start Nessus scanner by typing the following command into your terminal:
+/bin/systemctl start nessusd.service
+	Verify that the service is running:
+systemctl status nessusd.service
+	  
+
+      7. Go to https://kali:8834/, click on “Advance” and then “Proceed” to get to the Nessus web page. If this doesn't work, use https://localhost:8834 instead.
+      8. Proceed past the security warning:
+      * Firefox: Click on “Advanced”, then click “Accept the Risk and Continue”.
+      * Chrome: Click on “Advanced”, then click “Proceed to kali (unsafe)”.
+This will take you to the Nessus login page.
+  
+
+  
+
+      9. Once it loads, choose “Nessus Essentials” and create an account. Use an email address that you have access to, as an activation code will be sent to that address. 
+Please note that it will prompt you to use a work email address, or even a school address instead of Gmail. This is because of the “License and Terms of Use” as Nessus Essentials is often offered under specific terms of use, which may limit its use to non-commercial, personal use or educational purposes. Providing a work email helps enforce these terms and conditions. Be sure to use either your existing work or school email address, or alternatively use an Outlook email address.
+  
+
+      10. After the activation code, click continue and enter your username of choice and a password.
+  
+
+      11. Once you are signed in, you should see a landing page like the following:
+  
+
+      12. Click on “New Scan” and review the types of scans available. Note that this is a free edition of Nessus, and therefore you can only scan approximately 15 IP addresses.
+  
+
+      13. You will see a page with scan templates as shown below. Select “Host Discovery” and add “Name”, a description, and an IP address, and then start scanning.
+  
+
+
+
+The following is an example of a vulnerability scan, but remember to use your own IP address and not the one shown below:
+  
+
+Types of Nessus network scans
+      * Vulnerability scans: This is the primary function of Nessus. It scans network assets (servers, workstations, network devices, etc.) to identify vulnerabilities that could be exploited by attackers.
+      * Host discovery scans: These scans help in discovering and identifying all active hosts (devices) on a network, allowing you to understand the scope of your network and potential attack surface.
+      * Port scans: Nessus can perform scans to identify open ports on devices. This helps in understanding which services are running on a device and can sometimes reveal potential vulnerabilities associated with those services.
+      * Web application scans: It can scan web applications for common security issues such as SQL injection, XSS, and other vulnerabilities that could be exploited through web interfaces.
+      * Compliance audits: Nessus Essentials includes some basic compliance audit checks to help users assess whether their systems meet specific regulatory or best practice standards (e.g., CIS benchmarks).
+      * Configuration audits: It can audit configurations of various devices and systems to ensure they adhere to recommended security configurations, reducing the risk of misconfigurations that could be exploited.
+Burp Suite
+Now that you have obtained vulnerability and compliance information on all of the services in the network, you can turn your attention to the web applications specifically. The next tool that Pedro shows you, known as Burp Suite, is designed specifically for that purpose. It will provide you with detailed granularity to identify vulnerabilities and potential security issues in web applications during your vulnerability-testing activities.
+Burp Suite is a web vulnerability tool used in web application penetration testing to intercept requests and responses before they reach the web server. Acting as a proxy, or intermediate agent, between web requests and a web server, Burp Suite intercepts and can modify both unsecured (HTTP) and secure (HTTPS) traffic. Burp Suite will let you analyse requests and responses, and even manipulate parameters for vulnerabilities such as SQL injection and other vulnerabilities.
+You (and cybercriminals) will be able to see exploitable web application vulnerabilities at a very granular level. This means you can alter requests and responses to obtain confidential information or to find and exploit other vulnerabilities.
+To start Burp Suite, you can either type burpsuite in the terminal or navigate to your apps and select Burp Suite. When you start Burp Suite for the first time, you'll see a dialogue box asking if you want to load a configuration file. It’s advisable to select “Temporary project in memory” and then click “Next”. Select “Use Burp defaults” and click “Start Burp”.
+  
+  
+
+  
+  
+  
+
+You can click on the “Learn” tab to take a tour of the tool to learn more about it, as well as other tutorials.
+  
+
+Burp has two main uses:
+      1. Intercept HTTP requests:
+      * Visit any page with the browser set to utilise Burp Suite as a proxy.
+      * The HTTP requests will be intercepted by Burp Suite. These requests are shown under the “Intercept” subtab's “Proxy” tab.
+      * If necessary, make changes to the request before sending it to the server.
+      2. Analyse the traffic: 
+      * To view all of the intercepted requests and responses, navigate to the “HTTP history” subtab under “Proxy”.
+      * To get comprehensive details, including headers, bodies, and parameters, click on any request.
+Burp Suite's interface consists of several tabs, each serving a specific purpose in the web application testing process.
+  
+
+      * Proxy: By serving as a proxy between your browser and the intended web application, Burp Suite enables you to view, alter, and intercept the raw traffic.
+      * HTTP history(Sub-tab): Maintains a record of every HTTP request and response that goes via the proxy.
+      * WebSockets history(Sub-tab): Captures messages sent over WebSockets.
+      * Target: Enumerates and analyses the target application. Allows you to define which parts of the application should be tested.
+      * Intruder: Automates customised attacks. Enables you to carry out automated, tailored attacks – such as parameter manipulation, fuzzing, and brute force – to discover vulnerabilities.
+      * Repeater: Manually modifies and resends requests. You can repeatedly manually edit and resend individual requests to test how the program reacts. 
+      * Scanner (Pro version): Automates vulnerability scanning. Active scanning involves sending payloads to test for vulnerabilities like XSS, SQL injection, etc., while passive scanning involves analysing responses without modifying requests.
+      * Spider: Crawls the target application to discover content and functionality. 
+      * Decoder: Allows you to encode or decode data in various formats, such as URL, Base64, Hex, etc.
+      * Comparer: Compares different sets of data (e.g., HTTP responses) to highlight differences.
+  
+
+	Extra resource
+	Read more about Burp Suite tools and how they can be used.
+  
+
+XXE
+In this section, you will learn about the XML External Entity (XXE) injection vulnerability, which is part of the OWASP Top Ten (an awareness document that outlines the most critical security risks to web applications). XXE attacks target systems that parse eXtensible Markup Language (XML) input to disclose confidential information or to pivot to other internal systems.
+XML is a flexible, structured language used to store and transport data, and is a markup language much like HTML. XML was designed to be self-descriptive, but it doesn’t actually do anything as it is just information wrapped in tags. For example, this is a note from Jack to Jane stored in XML:
+<note>
+ <to>Jane</to>
+ <from>Jack</from>
+ <heading>Reminder</heading>
+ <body>Please remember to fetch the book!</body>
+</note>
+	The XML above is quite self-descriptive, as it has sender information, receiver information, a heading, and a message body.
+Important XML features
+As previously mentioned, XML documents are self-descriptive, meaning they include both data and its structure, which makes them easy to read and understand. Since XML is composed of plain text, it is human-readable and simple to modify. It is also platform-independent, ensuring there are no compatibility issues when using XML with various systems and technologies.
+XML also organises data hierarchically through the use of nested elements, which helps in representing complex data structures in an organised manner.
+XML usage and structure
+An XML document consists of elements enclosed in tags, attributes, and text content. Here’s a simple example:
+<?xml version="1.0" encoding="UTF-8"?>
+<bookstore>
+ <book category="programming">
+   <title lang="en">Learning XML</title>
+   <author>John Doe</author>
+   <year>2021</year>
+   <price>39.95</price>
+ </book>
+ <book category="web development">
+   <title lang="en">HTML & CSS</title>
+   <author>Jane Smith</author>
+   <year>2018</year>
+   <price>29.99</price>
+ </book>
+</bookstore>
+	XML documents must contain one root element that is the parent of all other elements, as shown in the following example:
+<root>
+ <child>
+   <subchild>.....</subchild>
+ </child>
+</root>
+	Using the example from earlier: 
+      * XML declaration: <?xml version="1.0" encoding="UTF-8"?> specifies the XML version and character encoding.
+      * Elements: <bookstore></bookstore> are the building blocks of XML, defined by start and end tags. They can contain other elements, attributes, and text. All elements must have a closing tag. XML tags are case-sensitive, so opening and closing tags must match.
+      * Attributes: In the <book category="programming"> code, category is an attribute that provides additional information about the book element and is defined within the start tag. Attribute values must always be quoted. In the example, category, lang, title, author, year, and price are all attributes.
+Parsing and manipulating XML
+Various programming languages offer libraries for handling XML. In Python, common libraries include xml.etree.ElementTree and lxml.
+What follows is a detailed example using Python's xml.etree.ElementTree library.
+Defining the XML string
+text = """
+<bookstore>
+ <book>
+   <title lang="en">Learning XML</title>
+   <author>John Doe</author>
+   <year>2021</year>
+ </book>
+</bookstore>
+"""
+	Creating an XML DOM parser
+An XML DOM parser is a tool that reads and interprets XML data, allowing you to interact with it programmatically. “DOM” stands for Document Object Model, which is a standard for representing XML documents as a tree structure, where each node corresponds to a part of the document.
+import xml.etree.ElementTree as ET
+
+# Define the XML string
+text = """
+<bookstore>
+ <book>
+   <title lang="en">Learning XML</title>
+   <author>John Doe</author>
+   <year>2021</year>
+ </book>
+</bookstore>
+"""
+
+# Parse the XML string
+root = ET.fromstring(text)
+
+# Access elements
+bookstore = root
+book = bookstore.find('book')
+title = book.find('title').text
+author = book.find('author').text
+year = book.find('year').text
+title_lang = book.find('title').get('lang')
+
+# Print the elements
+print(f"Title: {title}")
+print(f"Author: {author}")
+print(f"Year: {year}")
+print(f"Title Language: {title_lang}")
+	Breakdown:
+      * Importing the module: import xml.etree.ElementTree as ET imports the ElementTree module from Python's standard library.
+      * Defining the XML string: The XML string is defined with triple quotes """ to allow multi-line strings.
+      * Parsing the XML string: root = ET.fromstring(text) parses the XML string into an ElementTree object.
+      * Accessing elements: You can navigate through the XML tree and access specific elements using methods like find and get.
+      * Printing elements: The elements are printed to the console using formatted strings.
+The parser creates a new XML DOM object using the text string:
+import xml.etree.ElementTree as ET
+
+# Define the XML string
+text = """
+<bookstore>
+ <book>
+   <title lang="en">Learning XML</title>
+   <author>John Doe</author>
+   <year>2021</year>
+ </book>
+</bookstore>
+"""
+
+# Parse the XML string
+xmlDoc = ET.fromstring(text)
+
+# Example: Access elements
+for book in xmlDoc.findall('book'):
+   title = book.find('title').text
+   author = book.find('author').text
+   year = book.find('year').text
+   title_lang = book.find('title').get('lang')
+   
+   print(f"Title: {title}")
+   print(f"Author: {author}")
+   print(f"Year: {year}")
+   print(f"Title Language: {title_lang}")
+	Breakdown:
+      * The ET.fromstring(text) code in xmlDoc = ET.fromstring(text) parses the XML string into an ElementTree object. This is equivalent to parser.parseFromString(text, "text/xml") in JavaScript.
+      * You can then navigate through the parsed XML document to access specific elements. 
+XXE Attacks
+While working with XML parsers, it's important to be aware of security risks like XXE (XML External Entity) vulnerabilities. These vulnerabilities can occur when an XML parser processes external entities, allowing attackers to exploit the parser to access sensitive information, perform server-side request forgery (SSRF), or execute remote code. Below is an example of how an XXE attack might be conducted.
+XXE example:
+      1. Start up Burp Suite. You did this earlier, but the instructions are repeated here for ease of access.
+      1. Open your Kali Linux terminal and type burpsuite. The app should open. Alternatively, you can navigate to your apps in Kali and select Burp Suite from the list.
+      2. Navigate to the “Proxy” tab as shown in the screenshot below:
+  
+
+      3. Navigate to the “Intercept” tab. Ensure that “Intercept is off” is selected.
+  
+
+      4. Then select “Open browser”.
+  
+
+      5. Using Burp Suite’s Chromium browser, navigate to Exploiting XXE to retrieve files and read up on the topic if you haven’t done so already.
+  
+
+      6. Then, scroll down to the “Exploiting XXE using external entities to retrieve files” lab and attempt to solve the problem.
+  
+
+      7. Click on “Access the lab”.
+  
+
+      8. Log in with your existing account. If you don't have an account, please create a new one.
+  
+
+      9. As per the lab’s instructions, select a product within the shop and click “View details” on your selected product.
+  
+
+      10. Click on the “Check stock” option, as per the instructions in the lab.
+  
+
+      11. Ensure “Intercept is on” and refresh the lab environment to capture the request. You may need to click “Forward” to view the results below.
+  
+
+      12. You will now craft a response to the web server using the external entity “&xxe;”, which you will set with the following command to point to the server’s system file file:///etc/passwd. Once you’ve captured the request, you may click “Forward” and it will allow you to add this line of code between the XML declaration and the stockCheck element:
+<!DOCTYPE test [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+	  
+
+This line of code modifies the intercepted XML request to include an external entity definition. This external entity is defined so that it reads the /etc/passwd file. In doing so, you will cause the server to flag an error, as the server is looking for an integer value corresponding to the inventory's product ID. The server will then send back the contents of what the external entity is pointing to (the passwd file).
+Send the request to the repeater by right-clicking in the work area as shown below:
+  
+
+Now, click on the “Repeater” tab and add the following blue highlighted lines below, corresponding to the addition of the external entity “&xxe;” as described above:
+  
+
+Below is the response you should obtain after clicking “Send”. The server has sent back the contents of file://etc/passwd, which is what the external entity is pointing at.
+  
+
+What you see above is the server attempting to retrieve the value of “&xxe;”, which results in reading the contents of /etc/passwd and including it in the response. If successful, the response will contain an error message like “Invalid product ID”, followed by the contents of the /etc/passwd file.
+The /etc/passwd file is a system file on Unix-like operating systems that contains user account information. Exploiting this vulnerability results in:
+      * File disclosure: You can reveal the contents of the /etc/passwd file, which includes usernames and other account information.
+      * Security concerns: This can lead to serious security issues, as it exposes sensitive information about the system's user accounts. While the /etc/passwd file no longer contains password hashes (these are typically stored in /etc/shadow), it still provides valuable information that can be used for further attacks.
+To mitigate this, we would need to ensure that XML input is properly validated and that external entity processing is disabled to help protect against such vulnerabilities.
+Exploitation tools
+Exploitation tools are used to exploit vulnerabilities within a security system to gain unauthorised access to a network. Let's take a look at some of these useful tools for exploitation.
+Automated enumeration scripts
+As a cyber security specialist, you will also need to be familiar with proactive security activities, one of which is vulnerability testing, also known as vulnerability assessment or vulnerability scanning. It’s a process you will use to identify weaknesses and potential security gaps in a system, network, or application, in order to proactively discover vulnerabilities before malicious actors can exploit them. As part of vulnerability testing, it's crucial to assess not only system configurations but also the security posture of specific machine scripts, whether they operate within Linux or Windows environments.
+Linux machine scripts
+Linux machine scripts refer to scripts written in various scripting languages like Bash, Python, Perl, etc. that are executed on Linux operating systems. These scripts are used for automating tasks, managing system configurations, and performing various operations on Linux machines. However, they are not immune to security vulnerabilities. In this section, we will look into some tools that can detect and exploit potential weaknesses in Linux machine scripts.
+      * LinPEAS
+One of the methods attackers use to compromise systems is to raise their privilege level after gaining access to enable them to compromise the system.
+LinPEAS is one such privilege escalation script for Linux systems. It can be used to determine potential privilege escalation paths and misconfigurations that could be exploited by attackers.
+      * LinEnum
+Vulnerability testing is a proactive activity performed to uncover security gaps before issues arise. In your work as a vulnerability tester, you will need to identify vulnerabilities in Linux systems based on the installed software, or lack of security updates, if this is the case.
+LinEnum helps in identifying potential vulnerabilities and misconfigurations on Linux systems.
+For example, when the LinEnum script is run, it indicates the current version of the operating system, which could be exploitable if outdated. It also shows the member group the user belongs to. This is important as it places you within the privilege system you adhere to. For example, you could be a high-privilege user, such as people in the “root” group, or a low-privilege user, such as a member of your own group.
+To download the script, go to your terminal and run: 
+wget https://github.com/rebootuser/LinEnum/raw/master/LinEnum.sh -O LinEnum.sh
+	Next we will make the script executable and then run it with the commands below. The following screenshot is an example output of LinEnum once executed.
+chmod +x LinEnum.sh 
+
+
+./LinEnum.sh
+	  
+
+The command chmod +x LinEnum.sh is used to change the permissions of the file LinEnum.sh to make it executable, which means it allows the script LinEnum.sh to be run directly as an executable.
+      * chmod stands for “change modification” and is a command used to change the file permissions in Unix operating systems.
+      * +x adds the execute permission to the file, with the + meaning “add” and the x standing for “execute”. The file can now be run as a program or script.
+      * LinEnum.sh is the script we’re executing.
+      * ./LinEnum.sh is the command that runs the script directly in the current directory. This script typically involves gathering system and security information. The ./ indicates that the script is located in the current directory.
+      * Linux Exploit Suggester 
+Similar to LinPEAS, you can use Linux Exploit Suggester during penetration testing to identify vulnerabilities, which can be exploited to gain unauthorised access to a system and escalate privileges.
+Exploit Suggester analyses the kernel version and installed packages on Linux systems to uncover possible exploits or vulnerabilities that may exist for the current configuration.
+Windows machine scripts
+In contrast, Windows machine scripts, executed on Microsoft Windows operating systems and scripted in languages like PowerShell or batch scripting, serve administrative functions, automate tasks, and manage system configurations. The following are some of these tools that can identify and exploit vulnerabilities in Windows machine scripts. 
+      * WinPEAS 
+As mentioned, one of the methods attackers use to compromise systems is to raise their privilege level after gaining access to compromise the system.
+WinPEAS is a popular tool used to perform privilege escalation checks on Windows systems, similar to LinPEAS above. It's designed to automate the process of gathering information about a system's configuration, installed software, user privileges, and potential security vulnerabilities that could lead to privilege escalation.
+      * Windows Exploit Suggester
+Vulnerability testing is a proactive approach to identifying security gaps in Windows systems before they become issues. This involves using the Windows Exploit Suggester, which compares the system's software inventory with a database of known vulnerabilities to identify potential threats. The process helps in discovering multiple exploits based on installed software and missing security updates.
+Once vulnerabilities are identified, they need to be reviewed through security reports and bulletins to understand their severity. Prioritising these vulnerabilities based on their severity is crucial. After applying the necessary security patches, continuous monitoring and testing should be conducted to ensure the system remains secure. Note that some, if not all, of these remediation tasks can be implemented with commercial products.
+The following command utilises the windows-exploit-suggester.py tool to check for potential vulnerabilities on a Windows system by comparing the system's information against a vulnerability database:
+windows-exploit-suggester.py --database 2022-10-13-mssb.xls --systeminfo 
+systeminfo.txt
+	
+
+Below is a screenshot of the output generated by running the windows-exploit-suggester.py tool. 
+  
+
+This is what the different elements of the code we entered above means:
+      * windows-exploit-suggester.py is the Python script for Windows Exploit Suggester. This script analyses the provided system information file against the exploit database.
+      * --database 2022-10-13-mssb.xls specifies the database file to use. This file (2022-10-13-mssb.xls) contains information from Microsoft security bulletins and known exploits, updated as of October 13, 2022. The database is compared against the system information to identify vulnerabilities.
+      * --systeminfo systeminfo.txt specifies the system information file to analyse. In this case, systeminfo.txt is the file that contains detailed information about the Windows system you are assessing, generated by the systeminfo command on the target Windows machine.
+  
+
+	Extra resource
+	Explore further on privilege escalation tools for Linux and Windows machines.
+  
+
+Manual enumeration command line
+Instead of running an entire script to enumerate your environment, you can also apply a single command to identify what you are specifically interested in. Note this is only beneficial if you already have an idea of the overall environment. When performing manual enumeration, tools like Metasploit and exploits such as EternalBlue can be incredibly useful. Metasploit offers a range of modules for scanning and information gathering, facilitating targeted enumeration of specific vulnerabilities. EternalBlue, an exploit for a critical SMB vulnerability, exemplifies how understanding specific threats can enable precise and effective security assessments. Using these tools strategically allows for focused exploration and identification of potential weaknesses in your system.
+Metasploit
+Metasploit is a powerful open-source framework for penetration testing, available on Kali Linux. Its core functionality revolves around its extensive library of modules, which include exploit code for known vulnerabilities, but also auxiliary tools for tasks like scanning, information gathering, and post-exploitation activities. Explore the Metasploit documentation to learn more.
+EternalBlue
+​​The National Security Agency (NSA) created the cyber attack exploit known as EternalBlue, which the hacker collective Shadow Brokers released in April 2017. It especially targets CVE-2017-0144, a vulnerability in Microsoft's Server Message Block (SMB) protocol. Because of this vulnerability, an attacker can execute arbitrary code on a target computer without requiring authentication.
+Metasploit, which has a number of payloads, auxiliary modules, and exploits for cyber security testing, didn't take long to incorporate the EternalBlue exploit after it was leaked. This made it simpler for penetration testers – and regrettably, malicious actors – to take advantage of the SMB vulnerability on unpatched Windows computers.
+How EternalBlue works in Metasploit
+      1. Exploit module: Metasploit has an exploit module named exploit/windows/smb/ms17_010_eternalblue, which automates the process of exploiting the EternalBlue vulnerability.
+      2. Payload delivery: After exploiting the vulnerability, Metasploit can deliver various payloads to the target system. A common payload is the Meterpreter shell, which provides remote access and control over the compromised machine.
+Payloads
+Malicious software (malware) payloads are the portions of the program that carry out the malicious activity or destructive action. It is an essential part of cyber attacks, since once the system or network is penetrated, it is in charge of causing the desired harm or accomplishing the attacker's goals. Payloads are frequently a component of bigger cyber attacks that are intended to accomplish particular objectives, such as gaining system control or stealing data. 
+Components and characteristics of payloads:
+      * Delivery mechanism: The method by which the payload is delivered to the target system. This could be through phishing emails, malicious attachments, drive-by downloads, or exploiting vulnerabilities in software.
+      * Activation: The condition or trigger that causes the payload to execute. This can be immediate upon delivery, time-based (like logic bombs), or event-based (triggered by specific actions of the user or system).
+      * Execution: The process by which the payload carries out its intended function. This can involve running executable files, scripts, or code injected into legitimate processes.
+Payload modules
+In Metasploit, an exploit module is referred to as a payload. In the Metasploit framework, payload modules can be classified as singles, stagers, or stages. 
+      * Singles: Payloads classified as singles are those that are entirely self-contained. Just adding a user to the target system can constitute a single payload. Examples of single payloads include executable files, scripts, and macros.
+      * Stagers: These are payloads that consist of multiple components, with each component performing a specific action. Stagers are small, dependable devices that establish a network connection between the attacker and the victim. The first payload must be delivered to the target system via stagers. 
+      * Stages: Stages are used to execute additional commands or download additional components once the initial payload is delivered by stagers. 
+To understand the difference between these types of payloads, observe the naming convention in Metasploit. The “/” in the payload name separates different components. For instance, windows/shell_bind_tcp is a single payload that does not include any additional stages—it is self-contained. In contrast, windows/shell/bind_tcp includes both a stager (bind_tcp) and a stage (shell), with the “/” indicating the division between the stager and the stage.
+Types of payloads
+There are many types of payloads, and a few are listed below:
+      1. Destructive payloads: Intended to corrupt, erase, or harm systems and data. Examples include data corruption, disc formatting, and file deletion.
+      2. Bind shells: These payloads open a network port on the victim's machine and wait for the attacker to connect. Once connected, the attacker gains control of the victim's system.
+      3. Reverse shells: These payloads connect back to the attacker's machine, providing a remote command shell. This is often used to bypass firewalls that block incoming connections.
+      4. Payloads of spyware: These are used to collect data from the targeted system. Keyloggers, screen capture programs, and credential thieves are a few examples.
+      5. Payloads for ransomware: These encrypt data on the victim's computer and demand payment to unlock it. Examples are CryptoLocker and WannaCry.
+      6. Backdoor payloads: These payloads are designed to create a persistent backdoor on the victim’s system, allowing attackers to gain remote access and control. By installing a backdoor, these payloads bypass normal authentication mechanisms and grant unauthorised access to the attacker. Common examples of backdoor payloads include tools like NetBus and Back Orifice, as well as various remote access Trojans (RATs).
+      7. Adware payloads: These cause the user to see unsolicited adverts. Examples are browser redirection and pop-up advertisements.
+      8. Botnet payloads: These convert the compromised machine into a bot for integration into a botnet. Examples are Zeus and Mirai.
+      9. Rootkits: These alter the operating system to keep privileged access and conceal the existence of hidden malware.
+      10. Virus: A type of malicious code that replicates itself by inserting copies of its code into other programs or files on a system.
+      11. Trojan: A type of malware that disguises itself as a legitimate program or software.
+      12. Exploit payloads: Designed to take advantage of vulnerabilities or security flaws in a target system.
+      13. Auxiliary payloads: Designed to provide additional functionality to a primary payload.
+Configuring Payloads: LPORT and RHOST
+For payload configuration and execution in the context of cyber security and exploitation frameworks like Metasploit, LPORT and RHOST are crucial parameters. They outline the network configurations needed to get the attacker's computer and the target system in communication.
+      * LPORT stands for “Local Port”, and is the port number on the attacker's machine that will be used for listening or receiving connections. It can be used for reverse shells using port 4 444.
+      * RHOST stands for “Remote Host”, and is the IP address or hostname of the target system that the attacker aims to exploit or connect to. For example, if RHOST is set to 192.168.0.1, then the exploit will target the system at that IP address.
+Practical Application: Exploiting Vulnerabilities with Metasploit
+Let’s try to exploit a machine with the “EternalBlue” vulnerability. 
+      1. Go to TryHackMe on Kali Linux and create an account if you don't already have one, then log in to your TryHackMe account. 
+      2. Use the search bar on the TryHackMe dashboard to search for the “Blue” machine. Click on it, then click “Join Room” to be able to access the material.
+  
+
+  
+
+      3. Once you’ve joined the room, an option will pop up at the top of the screen to “Access Machines”, which you should click on next.
+  
+
+      4. You will see a popup on the side of the screen on how to access the machines. Choose the first option, “AttackBox”, and it will instruct you on what to click next. Please note that, if you encounter issues, you may follow these instructions to configure using OpenVPN as the second option.
+  
+
+  
+
+      5. Then close the popup and open/expand “Task 1” and click “Start Machine” to get your attack machine started.
+  
+
+      6. Next, click on “Start AttackBox” to get the attack machine started. You will get limited time if you are a free user. Also take note of the target IP address given to you.
+  
+
+  
+
+Once you have managed to get your machine started, you may open the terminal and start with Metasploit.
+Follow these instructions to use Metasploit:
+      1. Open up Metasploit by typing msfconsole into the command line.        
+      1. You may need to install it first with the following command: 
+sudo apt install metasploit-framework
+	If you’re using Ubuntu, you may also use:
+sudo snap install metasploit-framework
+	  
+
+      2. Now, you will use the preinstalled modules in Metasploit to search for the EternalBlue exploit.
+  
+
+      3. To select an option that allows you to carry out the exploit, enter the command use followed by the number of the exploit or the path of the exploit.
+  
+
+      4. Note we have chosen a module consisting of the EternalBlue exploit. To execute the exploit, you need to see what requirements are needed to successfully target the victim machine with the exploit. This is done by using the command show options, or just options.
+  
+
+  
+
+      5. Your duty as a penetration tester is to complete the correct details for the required settings. The settings you will need to set are:
+      * RHOST, which is the remote host, i.e., the victim's machine. In this case our RHOST is 10.10.41.85, but it may be different for you. The IP address can usually be found on the room's main page under the section that describes the machine’s details (see step six of the previous TryHackMe setup for where to find the target IP address). 
+      * LHOST and LPORT, which are the listening host and port of the ethical hacker’s machine. In this case, there is no need to fill in these settings as they were already correct, but generally, they have to be configured by the ethical hacker. In this case our LHOST is 10.10.6.11 and LPORT is 4444.
+      * Payload, which is the action that must be performed when the exploit is being executed. In this instance, you will have a Windows shell that is captured using a reverse shell.
+  
+
+      6. Successful exploitation (“gaining shell”) is when you have full access to the victim’s machine because you are the authority system, which is “root”.
+  
+
+      7. At this point, you should enumerate the victim's machine again as you are in new territory and you want to identify the privileges in your possession.
+  
+
+  
+
+
+
+  
+
+	Take note
+	The task(s) below is/are auto-graded. An auto-graded task still counts towards your progression and graduation. Give it your best attempt and submit it when you are ready. 
+When you select “Request Review”, the task is automatically complete, you do not need to wait for it to be reviewed by a mentor.
+You will then receive an email with a link to a model answer, as well as an overview of the approach taken to reach this answer.
+Take some time to review and compare your work against the model answer. This exercise will help solidify your understanding and provide an opportunity for reflection on how to apply these concepts in future projects.
+In the same email, you will also receive a link to a survey, which you can use to self-assess your submission. 
+Once you’ve done that, feel free to progress to the next task.
+  
+
+Auto-graded task 
+We’ve covered a lot of tools today! Did you try the recommended linked lab as you went along? If not, go back and do it now.
+In this task, you will conduct a vulnerability assessment of your local network to identify potential security risks and weaknesses. (If your local network consists of only the computer you are currently using, that is sufficient.)
+Start off by creating a Google doc (or similar word processing document) titled Ethical_Hacking_Answers. In your document, answer the following questions below.
+You will use two of the scanning and enumeration tools you reviewed to answer these questions. You will need to identify the right tool for each job. 
+      1. Map out the network topology.
+      1. What is the correct tool for this job?
+      2. Perform a comprehensive scan of the local network to identify:
+      1. active hosts,
+      2. open ports, and 
+      3. services running on those ports.
+      3. Take a screenshot of the output and paste it into your Google answers document. In the same document, note down how many devices there are on your local network.
+      2. Once you have identified the target systems, you must conduct a vulnerability scan on the identified hosts.
+      1. What is the correct tool for this job?
+      2. Take a screenshot of the output and paste it into your Google answers document.
+      3. Analyse the scan results to identify vulnerabilities. How many of each severity level (critical, high, medium, and low) are there in your local network, and how can you tell? Add the answers to your Google answers document.
+Save your document as a PDF and upload your Ethical_Hacking_Answers.pdf to your task folder for this task and click "Request review" on your dashboard.
+	
+
+Challenge
+You have covered XML external entity (XXE) injection. If you want to go a little further, read up on reflected XSS and complete the embedded lab (shown below) using Burp Suite.
+  
+
+	  
+
+	Share your thoughts
+	Please take some time to complete this short feedback form to help us ensure we provide you with the best possible learning experience.
+  
+
+Reference list
+Raza, M. (2024, July 31). OSI model: The 7 layers of network architecture. BMC. https://www.bmc.com/blogs/osi-model-7-layers/
+  
+
+Copyright © 2024 HyperionDev. All rights reserved.

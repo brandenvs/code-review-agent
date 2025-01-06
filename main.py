@@ -1,10 +1,9 @@
-from origin_processing.task_processor import extract_pdf_content, save_structured_content
-from origin_processing.code_processor import stream_code_file
+from origin_processing.task_processor import get_instructions
+from origin_processing.submission_processor import read_submission_file
 
 from origin_processing.review_processor import (
-    stream_review, 
+    processor, 
 )
-from db_processing.db_inserts import insert_review, insert_solution
 
 import argparse
 from pathlib import Path
@@ -107,7 +106,7 @@ def validate_task_pdf(pdf_path):
 
 
 def cr_pipeline(file_path):
-        review_content = stream_review(file_path)
+        review_content = processor(file_path)
 
         review_title = review_content['title']
         review_text =  review_content['review_text']
@@ -164,8 +163,29 @@ if __name__ == "__main__":
             for file_path in task_files:
                 file_name = get_file_name(file_path)
 
-                if file_name == 'review_text.txt':
-                    cr_pipeline(file_path)
+                # Submission
+                if file_name != 'review_text.txt' and file_name.endswith('.pdf') == False:
+                    max_length = 15
+                    
+                    submission_text = read_submission_file(file_path)
+
+
+                
+                
+                # # Submission pipeline
+                # if validate_task_pdf(file_name):
+                #     task_pdf = get_instructions(file_path)
+                #     for content in task_pdf:
+                #         print(content['content'] if content['section'] == 'Instructions' else None)
+                    
+                
+
+
+            input()
+                
+                # Code review pipeline
+                # if file_name == 'review_text.txt':
+                #     cr_pipeline(file_path)
     
     print('All Done!')
 

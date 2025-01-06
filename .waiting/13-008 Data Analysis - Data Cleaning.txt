@@ -1,0 +1,141 @@
+﻿Data Analysis – Data Cleaning
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+Introduction
+WELCOME TO THE DATA ANALYSIS – DATA CLEANING TASK!
+We live in a digital age. Therefore, vast amounts of data are produced and stored every day. It is extremely important to be able to organise, manipulate, and interpret this data in meaningful ways. In the next few tasks, you will learn to analyse data, and in this task, we’ll focus on data cleaning.
+Cleaning data is a very important aspect of any data scientist’s job! Without data cleaning, it becomes very hard to be able to create models or come up with assumptions from the data. Data that hasn’t been appropriately cleaned and formatted can also result in incorrect assumptions and poor decisions by the people presented with the data. Therefore, data scientists spend a lot (some say the majority) of their time cleaning data. Cleaning data could involve actions such as making sure that all data is formatted in the same way, removing nonsensical outliers, and identifying incorrect data for it to be changed or removed.
+
+
+DROPPING COLUMNS IN A DATAFRAME
+Often, not all columns in a dataset are useful or complete enough for analysis. For example, you might have a dataset containing student information (as shown in the image below), but you want to focus on analysing student grades. In this case, the “Mother”, “Father”, and “Address” columns are not important. Therefore, it may be unnecessary (or even inefficient) to retain these columns.
+
+
+  
+
+When cleaning data, it is important to save only the data that you need. What you need will depend on the goal of your data analysis. For example, if you want to study the population characteristics of students, then data such as students' addresses would be important, whereas information about their scores may not be necessary.
+To drop columns in pandas, you can use the following syntax:
+school_data.drop(["math_score", "english_score", "science_score"], axis=1, inplace=True)
+	
+
+The drop() method is used to remove columns from the DataFrame. The axis=1 parameter specifies that columns should be dropped, not rows, while inplace=True ensures that the changes are applied directly to the original DataFrame, rather than returning a new one. This effectively updates school_data by removing the math_score, english_score, and science_score columns.
+
+
+REPLACING VALUES
+Sometimes, it's necessary to replace certain values in your dataset with a consistent term. For instance, if your dataset includes a “Nationality” column where British nationals are recorded as “British”, “English”, “UK”, or “United Kingdom”, you might want to standardise these entries to a single term, such as “British”. You can achieve this by creating a function to find and replace all variations with the desired term. Similarly, you can handle null values, which are empty data points, by replacing them with a suitable value.
+
+
+For example, consider the “Nationality” column. If there are empty entries in this column, you can handle them by replacing all null values with a default term like “Other”, assuming that some individuals chose not to disclose their nationality. This would be done as follows:
+
+
+my_data.Nationality.fillna('Other', inplace=True)
+	
+
+To specify the column name, you can use the dot notation, like .Nationality. The fillna() method fills all blank values in the column with the specified value. In this case, it replaces any null values with “Other”. For more general replacements, you can use the replace() method. This replaces all instances of “UK” with “United Kingdom” in the Nationality column.
+my_data.Nationality.replace('UK', 'United Kingdom', inplace=True)
+	
+
+By using fillna() and replace(), you ensure your data is clean, consistent, and ready for analysis.
+
+
+ACCESSING SPECIFIC RECORDS
+Sometimes it is helpful to have a value that uniquely identifies a record as its index. Back to the example of the students, the index of the observations can be a series of 1, 2, 3 … N, or it could be the student identification number. When a user searches for a record, they may input the unique identifier (values in the “Identifier” column) to get the student’s records.
+
+
+In the code example below, we make sure that the column called “Identifier” is unique. We then set this column as the index. Then, the loc attribute is used to access a specific row by the index value for that row. 
+
+
+# Check all entries in “Identifier” are unique
+df['Identifier'].is_unique
+
+# Set “Identifier” column as the index
+df = df.set_index('Identifier')
+
+# Access a specific row
+df.loc[76244]
+	Recall, it is possible to make a copy of a complete Python list or a subset of a list using the slice operator. For example, consider the array nums with nine numbers (depicted below). You can get a subset of that by indexing the range you want, i.e., nums[2:7].
+
+
+  
+
+Depiction of number array slicing (Boiko, 2018)
+
+
+This approach can also be used with a dataset:
+# Slice records using loc
+subset_data = df.loc[1:80] 
+	  
+
+
+
+It’s also possible to access columns by their label. Explore these examples that show how to access DataFrame columns using column labels or positions.
+	
+
+We can only suggest some methods to clean your data. Every dataset will come with a different set of unique problems and you will have to get creative to work it out.
+Instructions
+In this task, you will need the following libraries:
+* fuzzywuzzy
+* chardet
+
+
+Within this task folder, you will find a Jupyter Notebook named data_cleaning_example.ipynb. Work through this notebook before moving on to the task.
+
+
+The task below is auto-graded. An auto-graded task still counts towards your progression and graduation.   
+
+
+Give it your best attempt and submit it when you are ready. 
+
+
+You will receive a 100% pass grade once you’ve submitted the task.
+
+
+When you submit the task, you will receive an email with a link to a model answer, as well as an overview of the approach taken to reach this answer. Take some time to review and compare your work against the model answer.
+
+
+In the same email, you will also receive a link to a survey for this task, which you can use as a self-assessment tool. Please take a moment to complete the survey. This exercise will help solidify your understanding and provide an opportunity for reflection on how to apply these concepts in future projects.
+
+
+Once you’ve done that, feel free to progress to the next task.
+	
+
+Auto-graded task 
+In this task, you will clean the country column and parse the date_measured column in the store_income_data_task.csv file. Use the examples given in data_cleaning_example.ipynb to guide you. 
+Complete the following in store_income_task.ipynb, which you can find in the code files for this task.:
+* Load store_income_data_task.csv.
+* Take a look at all the unique values in the country column. Then, convert the column entries to lowercase and remove any trailing white spaces.
+* Clean up the country column so that there are three distinct countries.
+* Create a new column called days_ago in the DataFrame that is a copy of the date_measured column, but instead shows a number that represents the number of days ago that it was measured. Note that the current date can be obtained using datetime.date.today().
+
+
+After completing your work, make sure to place all submission files inside the task folder. Once everything is in place, click “Request review” on your dashboard.
+	
+
+
+  
+
+HyperionDev strives to provide internationally excellent course content that helps you achieve your learning outcomes.
+
+Think that the content of this task, or this course as a whole, can be improved, or do you think we’ve done a good job?
+
+
+Click here to share your thoughts anonymously.
+
+  
+
+
+
+REFERENCES
+Boiko, S. (2018, October 3). Indexing and slicing for lists, tuples, strings, and other sequential types in Python. Railsware. https://railsware.com/blog/python-for-machine-learning-indexing-and-slicing-for-lists-tuples-strings-and-other-sequential-types/

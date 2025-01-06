@@ -1,0 +1,33 @@
+1. What is Web 3.0 and how is it different from Web 1.0 and Web 2.0?
+
+Web 1.0 being a set of static web pages, existed purely for (passive) information consumption. 
+
+Web 2.0 brings upon more enhanced communication channels , as opposed to the previous one-way setup of Web 1.0, 
+and creates more dynamic web pages that promote user interaction and collaboration. 
+
+A key example would be social networking sites like Facebook and Twitter (X).
+It is also marked by the emergence of web applications like Gmail (to name a few).
+
+Web 3.0 is said to be the next generation in the evolutionary progression of the world wide web, 
+building on its predecessors Web1.0 and Web 2.0 to enhance existing functionality and introduce new systems/technologies 
+to improve user experience (enhanced personalised content, control over their own data - perhaps) 
+
+2. What are the functional differences between the front end of a web application and its back end?
+
+The front-end of a web application, or the presentation layer, 
+is the part that the user will see and be able to interact with.
+Whereas the back-end, or data access layer, refers to the part which is responsible for returning the page, 
+and for storing or fetching user data. The typical user does not see this part.
+
+3. In your own words, explain the process that takes place from when you type a URL into the address bar in your browser 
+until you finally view the page you have requested. 
+
+In order to access information on the Web, a URL is used to locate what is requested. 
+When the URL is typed into the address bar of a browser, the browser needs to connect to a particular web server (as defined in the URL) 
+in order to send a request for the desired web page. 
+
+The web server receives this request and usually returns the page (directory). 
+
+If it cannot be found, the server will send an error message instead. 
+Once the browser receives the information, the connection will be closed and it will load the page 
+(and all other elements) within the browser window.
