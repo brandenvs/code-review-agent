@@ -46,18 +46,17 @@ db_config = {
     'password': 'postgres'
 }
 
-def insert_task(task_name, task_content, task_instructions, task_model_answer, task_model_answer1, metadata={}):
+def insert_task(
+    task_name, task_content, task_instructions, 
+    task_model_answer, task_model_answer1, 
+    metadata={}):
     '''
-    Schema -
-
-    tasks (
     id SERIAL PRIMARY KEY,
     task_name TEXT NOT NULL,
     task_content TEXT NOT NULL,
     task_instructions TEXT NOT NULL,
     model_answer TEXT NOT NULL,
     metadata JSONB
-    );
     '''
     try:
         conn = psycopg2.connect(
@@ -90,6 +89,60 @@ def insert_task(task_name, task_content, task_instructions, task_model_answer, t
         task_id = cursor.fetchone()[0]
         conn.commit()
 
+        print(f"ADDED Task!\n\tID: {task_id}")
+        return task_id
+
+    except psycopg2.Error as e:
+        print(f"Database error: {e}")
+        return None
+
+    finally:
+        if conn:
+            cursor.close()
+            conn.close()
+
+
+def insert_review(
+    task_id, task_name, review_content, 
+    submitted_content_1, submitted_content_2, 
+    metadata={}):
+    '''
+    id SERIAL PRIMARY KEY,
+    task_id INT NOT NULL,
+    review_content TEXT NOT NULL,
+    submitted_content_1 TEXT NOT NULL,
+    submitted_content_2 TEXT NOT NULL,
+    metadata JSONB,
+    '''
+    try:
+        conn = psycopg2.connect(
+            host=db_config['host'],
+            database=db_config['database'],
+            user=db_config['user'],
+            password=db_config['password']
+        )
+        cursor = conn.cursor()
+
+        insert_query = """
+        INSERT INTO reviews (task_id, task_name, review_content, submitted_content_1, submitted_content_2, metadata)
+        VALUES (%s, %s, %s, %s, %s, %s::jsonb)
+        """
+
+        metadata_json = json.dumps(metadata)
+
+        cursor.execute(
+            insert_query, (
+                task_id,
+                task_name,
+                review_content, 
+                submitted_content_1,
+                submitted_content_2,
+                metadata_json
+            )
+        )
+
+        conn.commit()
+
         print(f"ADDED Code Review!\n\tID: {task_id}")
         return task_id
 
@@ -103,6 +156,43 @@ def insert_task(task_name, task_content, task_instructions, task_model_answer, t
             conn.close()
 
 
+def review_processor(task_id, task_name, review_dir):
+    review_content_file = f'{review_dir}/review_text.txt'
+    review_submission_file = f'{review_dir}/submission.py'
+    review_submission_file1 = f'{review_dir}/submission1.py'
+
+
+    with open(review_content_file,  "r", encoding="utf-8", errors='replace') as file:
+        raw_file = file.read()
+        encoded_bytes = raw_file.encode('utf-8', errors='ignore')
+        review_content = encoded_bytes.decode('ascii', errors='ignore')
+
+
+    with open(review_submission_file, "r", encoding="utf-8", errors='replace') as file:
+        raw_file = file.read()
+        encoded_bytes = raw_file.encode('utf-8', errors='ignore')
+        review_submission_1 = encoded_bytes.decode('ascii', errors='ignore')
+
+
+    if os.path.exists(review_submission_file1):
+        with open(review_submission_file1, 'r', encoding='utf-8') as file:
+            raw_file = file.read()
+            encoded_bytes = raw_file.encode('utf-8', errors='replace')
+            review_submission_2 = encoded_bytes.decode('ascii', errors='replace')
+
+    else:
+        review_submission_2 = 'There is only one submission file'
+
+
+    insert_review(
+        task_id,
+        task_name,
+        review_content,
+        review_submission_1,
+        review_submission_2
+    )
+
+
 def task_processor(task_dir):
     task_name_file = f'{task_dir}/task_name.txt'
     task_content_file = f'{task_dir}/task_content.txt'
@@ -110,7 +200,6 @@ def task_processor(task_dir):
 
     task_model_answer_file = f'{task_dir}/model_answer/model_answer.py'
     task_model_answer_file1 = f'{task_dir}/model_answer/model_answer1.py'
-
 
 
     with open(task_name_file,  "r", encoding="utf-8") as file:
@@ -151,18 +240,24 @@ def task_processor(task_dir):
         task_model_answer,
         task_model_answer1
     )
-    return task_id
+    return task_id, task_name
 
 
 if __name__ == "__main__":
-    base_dir = BASE_DIR / 'task_processing/task_data'
+    base_dir = BASE_DIR / 'cr_auto/data'
     folders = list_folders(base_dir)
 
-    get_file_name = lambda x: Path(x).name
+    get_file_name = lambda x: Path(x)
 
     for folder in folders:
-        task_id = task_processor(f'{base_dir}/{folder}')
+        task_id, task_name = task_processor(f'{base_dir}/{folder}')
 
-        # task_id, task_name = task_processor(f'{base_dir}/{folder}/{task_file}.txt')
-        # model_answer_processor(task_id, task_name, f'{base_dir}/{folder}/model_answer/model_answer.py')
+        submission_folders = list_folders(f'{base_dir}/{folder}/reviews/')
+        for _folder in submission_folders:
+            review_processor(task_id, task_name, f'{base_dir}/{folder}/reviews/{_folder}')
+
+
+
+
+
 

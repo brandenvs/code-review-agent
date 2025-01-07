@@ -27,7 +27,7 @@ def generate_code_review(db_config):
 
         '''query_text_1 TEXT, query_text_2 TEXT, task_title TEXT, file_name TEXT'''
         print('Generating Code Review ')
-        cursor.execute("SELECT generate_rag_response_code_review(%s, %s, %s, %s);", (code_content_1, code_content_2, 'OOP – Inheritance', 'method_override.py'))
+        cursor.execute("SELECT generate_review(%s, %s, %s, %s);", (code_content_1, code_content_2, 'OOP – Classes', ''))
         generated_review = cursor.fetchone()[0]  # Fetch the generated review
 
         conn.commit()
