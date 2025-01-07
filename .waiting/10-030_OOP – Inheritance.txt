@@ -161,17 +161,9 @@ This demonstrates how inheritance allows subclasses to customise and extend the 
 
   
 
-	Take note
-	The task(s) below is/are auto-graded. An auto-graded task still counts towards your progression and graduation. Give it your best attempt and submit it when you are ready. 
-When you select “Request Review”, the task is automatically complete, you do not need to wait for it to be reviewed by a mentor.
-You will then receive an email with a link to a model answer, as well as an overview of the approach taken to reach this answer.
-Take some time to review and compare your work against the model answer. This exercise will help solidify your understanding and provide an opportunity for reflection on how to apply these concepts in future projects.
-In the same email, you will also receive a link to a survey, which you can use to self-assess your submission. 
-Once you’ve done that, feel free to progress to the next task.
+
   
 
-Auto-graded task 1
-In this task, you will demonstrate your understanding of inheritance. Make a copy of the inheritance_template.py file and name it inheritance_task.py. Then, follow the instructions below.
 * Add another method in the Course class that prints the head office location: Cape Town.
 * Create a subclass of the Course class named OOPCourse.
 * Create a constructor that initialises the following attributes with default values:
