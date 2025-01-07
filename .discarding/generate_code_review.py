@@ -3,8 +3,10 @@ import psycopg2
 
 def stream_code_file(file_path):
     with open(file_path, 'r', encoding='utf-8', errors='replace') as file:
-        parsed_code = file.read()
-    return parsed_code
+        raw_file = file.read()
+        encoded_bytes = raw_file.encode('utf-8', errors='replace')
+        query_text = encoded_bytes.decode('ascii', errors='replace')
+    return query_text
 
 
 def generate_code_review(db_config):
@@ -18,10 +20,14 @@ def generate_code_review(db_config):
         cursor = conn.cursor()
 
         file_path = input('Enter path to code file:\n> ')
-        code_content = stream_code_file(file_path)
+        code_content_1 = stream_code_file(file_path)
 
+        file_path = input('Enter path to SECOND code file:\n> ')
+        code_content_2 = stream_code_file(file_path)
+
+        '''query_text_1 TEXT, query_text_2 TEXT, task_title TEXT, file_name TEXT'''
         print('Generating Code Review ')
-        cursor.execute("SELECT generate_rag_response_file_content(%s);", (code_content,))
+        cursor.execute("SELECT generate_rag_response_code_review(%s, %s, %s, %s);", (code_content_1, code_content_2, 'OOP – Inheritance', 'method_override.py'))
         generated_review = cursor.fetchone()[0]  # Fetch the generated review
 
         conn.commit()

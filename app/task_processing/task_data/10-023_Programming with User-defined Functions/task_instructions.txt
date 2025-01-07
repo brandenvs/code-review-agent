@@ -1,0 +1,30 @@
+Instructions
+Read and run the accompanying example files provided before doing the task in order to become more comfortable with the concepts covered in this task.
+
+
+  
+
+	Take note
+	The task(s) below is/are auto-graded. An auto-graded task still counts towards your progression and graduation. Give it your best attempt and submit it when you are ready. 
+When you select “Request Review”, the task is automatically complete, you do not need to wait for it to be reviewed by a mentor.
+You will then receive an email with a link to a model answer, as well as an overview of the approach taken to reach this answer.
+Take some time to review and compare your work against the model answer. This exercise will help solidify your understanding and provide an opportunity for reflection on how to apply these concepts in future projects.
+In the same email, you will also receive a link to a survey, which you can use to self-assess your submission. 
+Once you’ve done that, feel free to progress to the next task.
+  Auto-graded task 1
+1. Create a Python file called holiday.py. 
+2. Your task will be to calculate a user’s total holiday cost, which includes the plane cost, hotel cost, and car rental cost.
+3. First, get the following user inputs:
+   * city_flight: The city they will be flying to (you can create some options for them. Remember, each city will have different flight costs).
+   * num_nights: The number of nights they will be staying at a hotel.
+   * rental_days: The number of days for which they will be hiring a car.
+4. Next, create the following four functions:
+   * hotel_cost(): This function will take num_nights as an argument and return a total cost for the hotel stay (you can choose the price per night charged at the hotel).
+   * plane_cost(): This function will take city_flight as an argument and return a cost for the flight. Hint: use if/else statements in the function to retrieve a price based on the chosen city.
+   * car_rental(): This function will take rental_days as an argument and return the total cost of the car rental (you can choose the daily rental cost).
+   * holiday_cost(): This function takes three arguments: num_nights, city_flight, and rental_days. Using these three arguments, call the hotel_cost(), plane_cost(), and car_rental() functions with their respective arguments, and finally return the total cost for the holiday.
+5. Print out all the details about the holiday in a way that is easy to read.
+
+
+Try running your program with different combinations of input to show its compatibility with different options. 
+Be sure to place files for submission inside your task folder and click "Request review" on your dashboard.

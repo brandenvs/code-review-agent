@@ -1,0 +1,39 @@
+ 1 
+* Create a Python script called album_management.py.
+* Design a class called Album. The class should contain:
+   * A constructor which initialises the following instance variables:
+      * album_name - Stores the name of an album.
+      * number_of_songs - Stores the number of songs within the album.
+      * album_artist -Stores the album’s artist.
+   * A __str__ method[t][u] that returns a string that represents an Album object in the following format:
+(album_name, album_artist, number_of_songs). 
+   * Create a new list called albums1, add five Album objects to it, and print out the list.
+   * Sort the list according to the number_of_songs and print it out. (You may want to examine the key parameter in the sort method).
+   * Swap the element at position 1 (index 0) of albums1 with the element at position 2 (index 1) and print it out.
+   * Create a new list called albums2.
+   * Add five Album objects to the albums2 list, and print out the list. 
+   * Copy all of the albums from albums1 into albums2. 
+   * Add the following two albums to albums2:
+   * (Dark Side of the Moon, Pink Floyd, 9)
+   * (Oops!... I Did It Again, Britney Spears, 16)
+   * Sort the albums in albums2 alphabetically according to the album name and print out the sorted list.
+   * Search for the album Dark Side of the Moon in albums2 and print out the index of the album in the albums2 list.
+
+Be sure to place files for submission inside your task folder and click "Request review" on your dashboard.
+	
+
+ 2
+In a newly created Python script called merge_sort.py:
+      * Modify the merge sort algorithm provided in the example usage section [v]above to order a list of strings by string length from the longest to the shortest string.
+      * Run the modified Merge sort algorithm against 3 string lists of your choice. Please ensure that each of your chosen lists is not sorted and has a length of at least 10 string elements.
+
+
+Be sure to place files for submission inside your task folder and click "Request review" on your dashboard.
+	
+
+ 3
+Using the following list: [27, -3, 4, 5, 35, 2, 1, -40, 7, 18, 9, -1, 16, 100]
+      * Create a Python script called sort_and_search.py. Consider which searching algorithm would be appropriate to use on the given list?
+      * Implement this search algorithm to search for the number 9. Add a comment to explain why you think this algorithm was a good choice.
+      * Research and implement the Insertion sort on this list. 
+      * Implement a searching algorithm you haven’t tried yet in this task on the sorted list to find the number 9. Add a comment to explain where you would use this algorithm in the real world.
