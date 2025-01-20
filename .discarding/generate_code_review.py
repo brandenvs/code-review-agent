@@ -22,12 +22,12 @@ def generate_code_review(db_config):
         file_path = input('Enter path to code file:\n> ')
         code_content_1 = stream_code_file(file_path)
 
-        file_path = input('Enter path to SECOND code file:\n> ')
-        code_content_2 = stream_code_file(file_path)
+        # file_path = input('Enter path to SECOND code file:\n> ')
+        # code_content_2 = stream_code_file(file_path)
 
         '''query_text_1 TEXT, query_text_2 TEXT, task_title TEXT, file_name TEXT'''
         print('Generating Code Review ')
-        cursor.execute("SELECT generate_review(%s, %s, %s, %s);", (code_content_1, code_content_2, 'OOP – Classes', ''))
+        cursor.execute("SELECT generate_code_review(%s, %s);", (code_content_1, 'User-defined functions'))
         generated_review = cursor.fetchone()[0]  # Fetch the generated review
 
         conn.commit()

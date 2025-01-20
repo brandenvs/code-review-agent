@@ -1,6 +1,5 @@
 from pathlib import Path
 import os
-import re
 
 
 import psycopg2
@@ -156,34 +155,76 @@ def insert_review(
             conn.close()
 
 
-def review_processor(task_id, task_name, review_dir):
+def review_processor(task_id, task_name, review_dir, options=None):
     review_content_file = f'{review_dir}/review_text.txt'
     review_submission_file = f'{review_dir}/submission.py'
     review_submission_file1 = f'{review_dir}/submission1.py'
 
+    print('Now processing review for directory: ', review_dir)
 
-    with open(review_content_file,  "r", encoding="utf-8", errors='replace') as file:
+    # Gets review text and processes
+    with open(review_content_file,  "r", encoding="utf-8", errors='ignore') as file:
         raw_file = file.read()
         encoded_bytes = raw_file.encode('utf-8', errors='ignore')
-        review_content = encoded_bytes.decode('ascii', errors='ignore')
+        dirty_review_content = encoded_bytes.decode('ascii', errors='ignore')
+
+        # Cleans the text
+        dirty_review_content = dirty_review_content.split('Positive').pop(0)
+        review_content = "\n".join(dirty_review_content)
+
+        print('Original:')
+        print(review_content)
+
+        while True:
+            print('Preprocessing extension - Select your schema:')
+            print('0 - Default')
+            print('1 - Lowercase/uppercase normalisation')
+            print('2 - Remove noise')
+            print('3 - Normalisation and remove noise')
+
+            match options:
+                case 0:
+                    print('Applying `default` schema ...')
+                    # TODO Default
+                    break
+
+                case 1:
+                    print('Applying `normalisation` schema ...')
+                    # TODO Lowercase/uppercase normalisation
+                    break
+
+                case 2:
+                    print('Removing Noise and applying `default` schema ...')
+                    # TODO Remove noise
+                    break
+
+                case 3:
+                    print('Removing Noise and applying `normalisation` schema ...')
+                    # TODO Normalisation and remove noise
+                    break
+
+                case _:
+                    print('Invalid option, try again!')
+                    continue
 
 
-    with open(review_submission_file, "r", encoding="utf-8", errors='replace') as file:
+    # Gets and processed code submission
+    with open(review_submission_file, "r", encoding="utf-8", errors='ignore') as file:
         raw_file = file.read()
         encoded_bytes = raw_file.encode('utf-8', errors='ignore')
         review_submission_1 = encoded_bytes.decode('ascii', errors='ignore')
 
-
+    # Gets and processes 2nd code submission
     if os.path.exists(review_submission_file1):
         with open(review_submission_file1, 'r', encoding='utf-8') as file:
             raw_file = file.read()
-            encoded_bytes = raw_file.encode('utf-8', errors='replace')
-            review_submission_2 = encoded_bytes.decode('ascii', errors='replace')
+            encoded_bytes = raw_file.encode('utf-8', errors='ignore')
+            review_submission_2 = encoded_bytes.decode('ascii', errors='ignore')
 
     else:
         review_submission_2 = 'There is only one submission file'
 
-
+    # Create review records
     insert_review(
         task_id,
         task_name,
@@ -209,26 +250,26 @@ def task_processor(task_dir):
 
     with open(task_content_file, "r", encoding="utf-8") as file:
         raw_file = file.read()
-        encoded_bytes = raw_file.encode('utf-8', errors='replace')
-        task_content = encoded_bytes.decode('ascii', errors='replace')
+        encoded_bytes = raw_file.encode('utf-8', errors='ignore')
+        task_content = encoded_bytes.decode('ascii', errors='ignore')
 
 
     with open(task_instructions_file, "r", encoding="utf-8") as file:
         raw_file = file.read()
-        encoded_bytes = raw_file.encode('utf-8', errors='replace')
-        task_instructions = encoded_bytes.decode('ascii', errors='replace')
+        encoded_bytes = raw_file.encode('utf-8', errors='ignore')
+        task_instructions = encoded_bytes.decode('ascii', errors='ignore')
 
 
     with open(task_model_answer_file, 'r', encoding='utf-8') as file:
         raw_file = file.read()
-        encoded_bytes = raw_file.encode('utf-8', errors='replace')
-        task_model_answer = encoded_bytes.decode('ascii', errors='replace')
+        encoded_bytes = raw_file.encode('utf-8', errors='ignore')
+        task_model_answer = encoded_bytes.decode('ascii', errors='ignore')
 
     if os.path.exists(task_model_answer_file1):
         with open(task_model_answer_file1, 'r', encoding='utf-8') as file:
             raw_file = file.read()
-            encoded_bytes = raw_file.encode('utf-8', errors='replace')
-            task_model_answer1 = encoded_bytes.decode('ascii', errors='replace')
+            encoded_bytes = raw_file.encode('utf-8', errors='ignore')
+            task_model_answer1 = encoded_bytes.decode('ascii', errors='ignore')
 
     else:
         task_model_answer1 = 'There is only one model answer for this task'
@@ -255,9 +296,3 @@ if __name__ == "__main__":
         submission_folders = list_folders(f'{base_dir}/{folder}/reviews/')
         for _folder in submission_folders:
             review_processor(task_id, task_name, f'{base_dir}/{folder}/reviews/{_folder}')
-
-
-
-
-
-

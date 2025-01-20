@@ -1,27 +1,47 @@
-name: pgai
+name: cr_agent
 services:
   db:
     image: timescale/timescaledb-ha:pg17
     environment:
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: cr_user
+      POSTGRES_DB: cr_database
+      POSTGRES_PASSWORD: crauto2025
     ports:
       - "5432:5432"
     volumes:
-      - data:/home/postgres/pgdata/data
+      - data:/home/postgres/pgdata/data_3
     command: [ "-c", "ai.ollama_host=http://ollama:11434" ]
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U cr_user -d cr_database" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
   vectorizer-worker:
     image: timescale/pgai-vectorizer-worker:latest
     environment:
-      PGAI_VECTORIZER_WORKER_DB_URL: postgres://postgres:postgres@db:5432/postgres
+      PGAI_VECTORIZER_WORKER_DB_URL: postgres://cr_user:crauto2025@db:5432/cr_database
       OLLAMA_HOST: http://ollama:11434
     command: [ "--poll-interval", "5s", "--log-level", "DEBUG" ]
+    depends_on:
+      db:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+
   ollama:
     image: ollama/ollama
     environment:
       OLLAMA_HOST: 0.0.0.0
       NVIDIA_VISIBLE_DEVICES: all
     ports:
-      - "11434:11434" # Expose Ollama port
+      - "11434:11434"
     runtime: nvidia
+
 volumes:
   data:
